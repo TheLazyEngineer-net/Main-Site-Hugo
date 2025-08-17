@@ -1,0 +1,48 @@
+@import "tailwindcss";
+@source "hugo_stats.json";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  html {
+    background-color: var(--color-stone-300);
+    color: var(--color-stone-900);
+    font-family: var(--font-sans);
+
+    @variant dark {
+      background-color: var(--color-stone-700);
+      color: var(--color-stone-300);
+    }
+  }
+
+  nav {
+    background-color: var(--color-stone-400);
+
+    @variant dark {
+      background-color: var(--color-stone-900);
+    }
+  }
+
+  h2 {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--color-amber-800);
+
+    @variant dark {
+      color: var(--color-amber-600);
+    }
+  }
+
+  a {
+    font-weight: 600;
+    color: var(--color-teal-900);
+
+    @variant dark {
+      color: var(--color-teal-400);
+
+      @variant hover {
+        color: var(--color-indigo-400);
+      }
+    }
+  }
+}

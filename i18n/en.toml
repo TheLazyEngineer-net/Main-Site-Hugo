@@ -1,0 +1,1 @@
+copyright = 'Copyright &copy; {{ time.format "2006" now }} {{ .Site.Params.author }}.'

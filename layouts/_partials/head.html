@@ -1,0 +1,15 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title site.Title }}{{ end }}</title>
+{{- with (templates.Defer (dict "key" "global")) -}}
+  {{- partial "head/css.html" . -}}
+  {{- partial "head/js.html" . -}}
+{{- end -}}
+
+<!-- initialize light/dark mode -->
+<script>
+  function toggleTheme(isDark) {
+    localStorage.theme = isDark ? 'dark' : 'light';
+    document.documentElement.classList.toggle('dark', isDark);
+  }
+</script>

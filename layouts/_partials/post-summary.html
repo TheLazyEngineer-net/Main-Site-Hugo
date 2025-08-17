@@ -1,0 +1,28 @@
+{{- $page := .page -}}
+
+{{- with $page -}}
+  <div class="flex gap-4">
+    <h2 class="mt-8 mb-2 order-2">
+      <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+    </h2>
+  </div>
+
+  <article class="space-y-4">
+    {{ with .Param "featuredImage" }}
+      {{ with resources.Get . }}
+        {{ $image := . }}
+        {{ if ne .MediaType.SubType "svg" }}
+          {{ $image := .Process "fit 128x128" }}
+        {{ end }}
+
+        <figure class="float-left mr-4">
+          <img src="{{ $image.RelPermalink }}" width=128 height=128 class="bg-stone-300 rounded-lg">
+        </figure>
+      {{ end }}
+    {{ end }}
+
+    {{ .Summary }}
+  </article>
+{{ else }}
+
+{{ end }}

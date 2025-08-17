@@ -1,0 +1,24 @@
++++
+title = "Image Shortcode"
+
+[[parameters]]
+name = "path"
+type = "string"
+
+[[parameters]]
+name = "class"
+type = "string"
+
+[[parameters]]
+name = "size"
+type = "string"
++++
+
+{{ $path := .Get "path" }}
+{{ with resources.Get $path }}
+  {{ $size := .Get "size" }}
+  {{ $image := .Process (printf "fit %s" $size) }}
+  <figure {{ with .Get "class" }}class="{{ . }}"{{ end }}>
+    <img src="{{ $image.RelPermalink }}" width="{{ $image.Width }}" height="{{ $image.Height }}">
+  </figure>
+{{ end }}
