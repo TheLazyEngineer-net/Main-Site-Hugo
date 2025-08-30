@@ -19,6 +19,11 @@ name = 'Docs'
 pageRef = '/docs'
 weight = 30
 
+[[menus.main]]
+name = 'About'
+pageRef = '/about'
+weight = 40
+
 [build]
 [build.buildStats]
 enable = true

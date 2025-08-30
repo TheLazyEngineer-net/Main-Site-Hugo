@@ -1,7 +1,11 @@
 {{- define "main" -}}
-  <div class="flex flex-col h-screen w-full md:w-3xl">
-    {{- range site.RegularPages -}}
-      {{- partial "post-summary.html" (dict "page" .) -}}
+  <div data-pagefind-ignore="all" class="flex flex-col items-center">
+    <h1>Recent Posts</h1>
+    <hr class="collapse sm:visible border-2 w-11/12 mx-auto my-2" />
+    {{- with site.GetPage "/posts" -}}
+      {{- range .Pages -}}
+        {{- partial "post-summary.html" (dict "page" .) -}}
+      {{- end -}}
     {{- end -}}
   </div>
 {{- end -}}

@@ -1,13 +1,16 @@
 {{- $page := .page -}}
 
 {{- with $page -}}
-  <div class="flex gap-4">
-    <h2 class="mt-8 mb-2 order-2">
+  <div class="flex flex-col mb-2">
+    <h2 class="mb-1">
       <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
     </h2>
+    {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+    {{ $dateHuman := .Date | time.Format ":date_long" }}
+    <time datetime="{{ $dateMachine }}" class="italic">{{ $dateHuman }}</time>
   </div>
 
-  <article class="space-y-4">
+  <article class="">
     {{ with .Param "featuredImage" }}
       {{ with resources.Get . }}
         {{ $image := . }}
@@ -16,7 +19,7 @@
         {{ end }}
 
         <figure class="float-left mr-4">
-          <img src="{{ $image.RelPermalink }}" width=128 height=128 class="bg-stone-300 rounded-lg">
+          <img src="{{ $image.RelPermalink }}" width=128 height=128 class="bg-stone-400 dark:bg-stone-300 rounded-lg p-1">
         </figure>
       {{ end }}
     {{ end }}

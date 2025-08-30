@@ -1,0 +1,17 @@
+{{ define "main" }}
+  <div data-pagefind-ignore="all">
+    <h1 class="mb-8">{{ .Title }}</h1>
+    {{- partial "searchbar.html" -}}
+    <ul search-results search-results-count="10">
+      <template search-result>
+        <li>
+          <a seach-result-link>
+            <h4 search-result-title></h4>
+            <img search-result-image>
+            <p search-result-excerpt></p>
+          </a>
+        </li>
+      </template>
+    </ul>
+  </div>
+{{ end }}
