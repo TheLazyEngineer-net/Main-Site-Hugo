@@ -2,7 +2,7 @@
 {{- $size := .Get "size" -}}
 {{- $class := .Get "class" -}}
 {{- with resources.Get $path -}}
-  {{- $image := .Process (printf "fit %s" $size) -}}
+  {{- $image := .Resize $size -}}
   <figure {{ with $class }}class="{{ . }}"{{ end }}>
     <img src="{{ $image.RelPermalink }}" width="{{ $image.Width }}" height="{{ $image.Height }}">
   </figure>

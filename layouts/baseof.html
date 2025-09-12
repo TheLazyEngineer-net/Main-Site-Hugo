@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html class="" lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+<html theme="light" lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
   <head>
     {{ partial "head.html" . -}}
   </head>
-  <body class="flex flex-col items-center min-h-screen bg-stone-600 dark:bg-stone-900">
-    {{ partial "header.html" . -}}
-    <main class="flex flex-col items-center justify-center max-w-4xl bg-stone-300 dark:bg-stone-700 p-8 my-4 rounded-2xl shadow-md/70 shadow-stone-950" data-pagefind-body>
+  <body class="grid grid-rows-[fit-content(4rem)_1fr_fit-content(6rem)] min-h-screen text-text bg-background font-primary">
+    <header class="flex justify-center items-center sticky top-0 z-50 w-screen h-12 bg-bar">
+      {{ partial "header.html" . -}}
+    </header>
+    <main data-pagefind-body class="self-start justify-self-center flex w-full max-w-4xl p-8 my-8 bg-foreground rounded-2xl">
       {{ block "main" . }}{{ end -}}
     </main>
-    {{ partial "footer.html" . -}}
+    <footer class="self-end w-screen bg-bar">
+      {{ partial "footer.html" . -}}
+    </footer>
   </body>
 </html>

@@ -5,11 +5,3 @@
   {{- partial "head/css.html" . -}}
   {{- partial "head/js.html" . -}}
 {{- end -}}
-
-<!-- initialize light/dark mode -->
-<script>
-  function toggleTheme(isDark) {
-    localStorage.theme = isDark ? 'dark' : 'light';
-    document.documentElement.classList.toggle('dark', isDark);
-  }
-</script>

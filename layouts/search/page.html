@@ -1,17 +1,32 @@
 {{ define "main" }}
-  <div data-pagefind-ignore="all">
-    <h1 class="mb-8">{{ .Title }}</h1>
+  <div data-pagefind-ignore="all" class="flex flex-col justify-start items-center w-full h-auto">
+    <h1 class="mb-4">{{ .Title }}</h1>
     {{- partial "searchbar.html" -}}
-    <ul search-results search-results-count="10">
+    <ul search-results search-results-count="1" class="list-none mt-4 max-w-2xl ml-0 mb-0">
       <template search-result>
         <li>
-          <a seach-result-link>
-            <h4 search-result-title></h4>
-            <img search-result-image>
-            <p search-result-excerpt></p>
+          <a search-result-link class="text-text">
+            <div class="grid grid-rows-[fit-content(2rem)_fit-content(6rem)] grid-flow-col p-2 rounded-lg">
+              <h3 search-result-title class=""></h3>
+              <div class="flex flex-nowrap items-center gap-2">
+                <img search-result-image class="h-20 object-scale-down ml-0">
+                <p search-result-excerpt class="text-current text-sm font-normal m-0"></p>
+              </div>
+            </div>
           </a>
         </li>
       </template>
     </ul>
+    <div search-pagination class="flex gap-4">
+      <template search-pagination-prev>
+        <button type="button">PREV</button>
+      </template>
+      <template search-pagination-next>
+        <button type="button">NEXT</button>
+      </template>
+      <template search-pagination-text>
+        <button type="button"></button>
+      </template>
+    </div>
   </div>
 {{ end }}

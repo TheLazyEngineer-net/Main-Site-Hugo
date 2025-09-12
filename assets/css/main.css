@@ -1,64 +1,67 @@
 @import "tailwindcss";
 @source "hugo_stats.json";
 
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:where([theme=dark] *));
+
+@theme {
+  --color-text: var(--color-stone-900);
+  --color-background: var(--color-stone-200);
+  --color-foreground: var(--color-stone-300);
+  --color-bar: var(--color-stone-400);
+  --color-logo: var(--color-amber-700);
+  --color-heading: var(--color-cyan-900);
+  --color-hyperlink: var(--color-teal-900);
+  --color-hyperlink-hover: var(--color-indigo-400);
+  --color-button: var(--color-teal-900);
+  --color-button-hover: var(--color-teal-700);
+  --color-mark: var(--color-amber-400);
+
+  --font-primary: var(--font-sans);
+}
 
 @layer base {
-  html {
-    background-color: var(--color-stone-300);
-    color: var(--color-stone-900);
-    font-family: var(--font-sans);
-
-    @variant dark {
-      background-color: var(--color-stone-700);
-      color: var(--color-stone-300);
-    }
+  html[theme="light" ] .highlight {
+    @import "./syntax-light.css";
   }
 
-  nav {
-    background-color: var(--color-stone-400);
+  html[theme=dark] {
+    --color-text: var(--color-stone-400);
+    --color-background: var(--color-stone-700);
+    --color-foreground: var(--color-stone-800);
+    --color-bar: var(--color-stone-900);
+    --color-heading: var(--color-cyan-500);
+    --color-hyperlink: var(--color-teal-400);
+    --color-mark: var(--color-amber-800);
 
-    @variant dark {
-      background-color: var(--color-stone-900);
+    .highlight {
+      @import "./syntax-dark.css";
     }
   }
 
   h1 {
     font-size: var(--text-3xl);
     font-weight: 800;
-    color: var(--color-cyan-900);
-
-    @variant dark {
-      color: var(--color-cyan-500);
-    }
+    color: var(--color-heading);
   }
 
   h2 {
     font-size: var(--text-2xl);
     font-weight: 700;
-    color: var(--color-amber-800);
-
-    @variant dark {
-      color: var(--color-amber-600);
-    }
+    color: var(--color-heading);
   }
 
   h3 {
     font-size: var(--text-xl);
     font-weight: 600;
-    margin-bottom: 1rem;
+    color: var(--color-heading);
   }
 
   a {
     font-weight: 600;
-    color: var(--color-teal-900);
+    color: var(--color-hyperlink);
 
-    @variant dark {
-      color: var(--color-teal-400);
-
-      @variant hover {
-        color: var(--color-indigo-400);
-      }
+    @variant hover {
+      color: var(--color-hyperlink-hover);
     }
   }
 
@@ -97,7 +100,26 @@
     }
   }
 
-  .highlight {
-    margin-bottom: 1rem;
+  button {
+    font-size: var(--text-lg);
+    font-weight: 500;
+    background-color: var(--color-button);
+    border-radius: var(--radius-md);
+    padding-inline: calc(var(--spacing) * 3);
+    padding-block: calc(var(--spacing) * 1);
+    cursor: pointer;
+
+    @variant hover {
+      background-color: var(--color-button-hover);
+    }
   }
+
+  mark {
+    color: var(--color-text);
+    background-color: var(--color-mark);
+    border-radius: var(--radius-sm);
+  }
+}
+
+@layer components {
 }

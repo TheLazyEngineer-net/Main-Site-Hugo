@@ -24,6 +24,10 @@ name = 'About'
 pageRef = '/about'
 weight = 40
 
+[markup]
+[markup.highlight]
+noClasses = false
+
 [build]
 [build.buildStats]
 enable = true
