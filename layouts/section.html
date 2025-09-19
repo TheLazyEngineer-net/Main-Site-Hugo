@@ -1,6 +1,7 @@
 {{ define "main" }}
   <div data-pagefind-ignore="all">
     <h1>{{ .Title }}</h1>
+    <h4>{{ .Summary }}</h4>
     {{ .Content }}
     <div class="flex flex-col w-full">
       {{- range .Pages -}}

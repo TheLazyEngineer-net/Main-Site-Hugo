@@ -1,0 +1,13 @@
+{{ define "main" }}
+  <div data-pagefind-ignore="all" class="flex gap-2">
+    {{- with .GetPage "/docs" -}}
+      {{ partial "sidebar/sections.html" . }}
+    {{- end -}}
+    <div>
+      <h1 class="mb-8">{{ .Title }}</h1>
+      <div>
+        {{ .Content }}
+      </div>
+    </div>
+  </div>
+{{ end }}

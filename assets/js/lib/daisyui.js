@@ -1,0 +1,1 @@
+/nix/store/h8a9vfxlwh8vxbx5cvihgf46crz8f15y-daisyui.js

@@ -1,125 +1,47 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 @source "hugo_stats.json";
+@plugin "./assets/js/lib/daisyui.js" {
+  themes: light --default, dark --prefersdark;
+}
 
-@custom-variant dark (&:where([theme=dark] *));
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@custom-variant current (&:where(.current, .current *));
+
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("/fonts/inter/InterVariable.woff2") format ("woff2");
+}
 
 @theme {
-  --color-text: var(--color-stone-900);
-  --color-background: var(--color-stone-200);
-  --color-foreground: var(--color-stone-300);
-  --color-bar: var(--color-stone-400);
-  --color-logo: var(--color-amber-700);
-  --color-heading: var(--color-cyan-900);
-  --color-hyperlink: var(--color-teal-900);
-  --color-hyperlink-hover: var(--color-indigo-400);
-  --color-button: var(--color-teal-900);
-  --color-button-hover: var(--color-teal-700);
-  --color-mark: var(--color-amber-400);
-
-  --font-primary: var(--font-sans);
+  --font-primary: Inter, ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
-  html[theme="light" ] .highlight {
+  html[data-theme="light" ] .highlight {
     @import "./syntax-light.css";
   }
 
-  html[theme=dark] {
-    --color-text: var(--color-stone-400);
-    --color-background: var(--color-stone-700);
-    --color-foreground: var(--color-stone-800);
-    --color-bar: var(--color-stone-900);
-    --color-heading: var(--color-cyan-500);
-    --color-hyperlink: var(--color-teal-400);
-    --color-mark: var(--color-amber-800);
-
-    .highlight {
-      @import "./syntax-dark.css";
-    }
+  html[data-theme="dark"] .highlight {
+    @import "./syntax-dark.css";
   }
 
-  h1 {
-    font-size: var(--text-3xl);
-    font-weight: 800;
-    color: var(--color-heading);
+  svg {
+    fill: currentColor;
   }
 
-  h2 {
-    font-size: var(--text-2xl);
-    font-weight: 700;
-    color: var(--color-heading);
+  .highlight {
+    overflow-x: auto;
+    background-size: cover;
   }
 
-  h3 {
-    font-size: var(--text-xl);
-    font-weight: 600;
-    color: var(--color-heading);
-  }
-
-  a {
-    font-weight: 600;
-    color: var(--color-hyperlink);
-
-    @variant hover {
-      color: var(--color-hyperlink-hover);
-    }
-  }
-
-  ul {
-    max-width: var(--container-xl);
-    list-style-type: disc;
-    list-style: inside;
-    margin-left: 4rem;
-    margin-bottom: 2rem;
-  }
-
-  ol {
-    max-width: var(--container-xl);
-    list-style-type: decimal;
-    margin-left: 4rem;
-    margin-bottom: 2rem;
-  }
-
-  li {
-    margin-bottom: 0.5rem;
-  }
-
-  p {
-    margin-bottom: 1rem;
-  }
-
-  img {
-    display: inline;
-    float: right;
-    margin-left: 1rem;
+  pre.chroma {
+    width: fit-content;
+    min-width: 100%;
+    padding: calc(var(--spacing) * 2);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-
-    @variant dark {
-      --tw-shadow-color: var(--color-slate-100);
-    }
   }
-
-  button {
-    font-size: var(--text-lg);
-    font-weight: 500;
-    background-color: var(--color-button);
-    border-radius: var(--radius-md);
-    padding-inline: calc(var(--spacing) * 3);
-    padding-block: calc(var(--spacing) * 1);
-    cursor: pointer;
-
-    @variant hover {
-      background-color: var(--color-button-hover);
-    }
-  }
-
-  mark {
-    color: var(--color-text);
-    background-color: var(--color-mark);
-    border-radius: var(--radius-sm);
-  }
-}
-
-@layer components {
 }

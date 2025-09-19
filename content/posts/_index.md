@@ -1,5 +1,4 @@
 +++
-title = 'Opinionated Posts about Technology'
+title = 'Opinion Posts'
+summary = 'A public collection of subjective ideas and best practices'
 +++
-
-Best practices as I see them

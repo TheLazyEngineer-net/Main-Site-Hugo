@@ -1,5 +1,5 @@
 {{- $page := .page }}
-{{- $class := .class }}
+{{- $class := "" -}}
 {{- range .menuEntries }}
   {{- $attrs := dict "href" .URL "class" $class }}
   {{- if $page.IsMenuCurrent .Menu . }}
@@ -13,7 +13,7 @@
       {{- $name = . }}
     {{- end }}
   {{- end }}
-  <li class="flex grow">
+  <li>
     <a
       {{- range $k, $v := $attrs }}
         {{- with $v }}

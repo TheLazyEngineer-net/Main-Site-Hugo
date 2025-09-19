@@ -1,14 +1,19 @@
 {{ define "main" }}
-  <div class="flex flex-col">
-    <h1 class="self-center">{{ .Title }}</h1>
+  <div class="flex flex-col items-center prose md:prose-lg max-w-none">
+    <div class="flex flex-col">
+      <h1 class="self-start">{{ .Title }}</h1>
 
-    {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-    {{ $dateHuman := .Date | time.Format ":date_long" }}
-    <time datetime="{{ $dateMachine }}" class="self-center italic mb-4">{{ $dateHuman }}</time>
-
-    <div>
-      {{ .Content }}
+      {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+      {{ $dateHuman := .Date | time.Format ":date_long" }}
+      <time datetime="{{ $dateMachine }}" class="self-end pr-4 italic">{{ $dateHuman }}</time>
     </div>
+
+    <hr class="w-2/3">
+
+    <article>
+      {{ .Content }}
+    </article>
+
     <div data-pagefind-ignore="all">
       {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
     </div>

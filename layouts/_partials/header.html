@@ -1,71 +1,59 @@
-<div class="flex flex-grow justify-between gap-4 max-w-5xl h-8 mx-4">
-  <!-- Site Logo -->
-  <a class="flex space-x-3 rtl:space-x-reverse" href="https://thelazyengineer.net">
-    <span class="font-sans font-stretch-ultra-condensed tracking-tight font-bold text-nowrap text-2xl text-logo">The Lazy Engineer</span>
-  </a>
-
-  <!-- Large Screen Layout -->
-  <div class="hidden md:flex grow justify-center order-1">
-    <ul class="flex items-center justify-center gap-1 text-xl font-extrabold h-10 m-0">
-      {{- partial "navbar.html" (dict "page" . "menuEntries" site.Menus.main "class" "text-center rounded dark:text-stone-400 hover:bg-stone-700 active:border-2 px-2") }}
-    </ul>
-  </div>
-
-  <div class="hidden md:flex gap-1 md:gap-2 md:order-2">
-    {{- partial "theme-toggle.html" -}}
-    {{- partial "searchbar.html" -}}
-    <ul search-results search-results-count="10" class="list-none mt-4 max-w-2xl ml-0 mb-0">
-      <template search-result>
-        <li>
-          <a search-result-link class="text-text">
-            <div class="grid grid-rows-[fit-content(2rem)_fit-content(6rem)] grid-flow-col p-2 hover:bg-bar rounded-lg">
-              <h3 search-result-title class=""></h3>
-              <div class="flex flex-nowrap items-center gap-2">
-                <img search-result-image class="h-20 object-scale-down ml-0">
-                <p search-result-excerpt class="text-current text-sm font-normal m-0"></p>
-              </div>
-            </div>
-          </a>
-        </li>
-      </template>
-    </ul>
-    <div search-pagination class="flex">
-      <template search-pagination-prev>
-        <button type="button">PREV</button>
-      </template>
-      <template search-pagination-next>
-        <button type="button">NEXT</button>
-      </template>
-      <template search-pagination-item>
-        <button type="button"></button>
-      </template>
+<header class="navbar sticky top-0 z-50 bg-base-300">
+  <div class="navbar-start">
+    <div class="dropdown">
+      <div tabindex="0" role="button" class="btn btn-ghost md:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+        </svg>
+      </div>
+      <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box">
+        {{- partial "navbar.html" (dict "page" . "menuEntries" site.Menus.main) }}
+      </ul>
     </div>
+    <a class="btn btn-ghost tracking-tight font-bold text-nowrap text-2xl text-primary" href="https://thelazyengineer.net">
+      TheLazyEngineer
+    </a>
   </div>
-
-  <!-- Small Screen Layout -->
-  <div class="flex md:hidden items-center justify-between w-full md:w-auto md:order-1">
-    <button
-      type="button"
-      data-collapse-toggle="navbar-search"
-      aria-controls="navbar-search"
-      aria-expanded="false"
-      class="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg text-sm p-2.5 me-1">
-
-      <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+  
+  <div class="navbar-center hidden md:flex">
+    <ul class="menu menu-horizontal menu-lg font-bold text-accent">
+      {{- partial "navbar.html" (dict "page" . "menuEntries" site.Menus.main) }}
+    </ul>
+  </div>
+  
+  <div class="navbar-end flex gap-2">
+    <label class="input input-sm">
+      <svg
+        class="w-4 h-4 text-text"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 20 20">
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
       </svg>
-      <span class="sr-only">Search</span>
-    </button>
-
-    <button data-collapse-toggle="navbar-search" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:hover:bg-stone-700 dark:focus:ring-gray-600" aria-controls="navbar-search" aria-expanded="false">
-      <span class="sr-only">Open main menu</span>
-      <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+      <input type="search" class="grow" placeholder="Search" />
+      <kbd class="kbd kbd-sm">⌘</kbd>
+      <kbd class="kbd kbd-sm">K</kbd>
+    </label>
+    <label class="btn btn-primary btn-sm swap swap-rotate">
+      <input theme-toggle type="checkbox" />
+    
+      <!-- sun icon -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 256 256"
+        class="swap-on h-6 w-6 fill-current">
+        <rect width="256" height="256" fill="none"/>
+        <path d="M108.11,28.11A96.09,96.09,0,0,0,227.89,147.89,96,96,0,1,1,108.11,28.11Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
       </svg>
-    </button>
-
-    <ul class="flex flex-col p-2 md:p-0 text-lg font-semibold border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
-      {{- partial "navbar.html" (dict "page" . "menuEntries" site.Menus.main "class" "block dark:text-orange-600") }}
-    </ul>
+    
+      <!-- moon icon -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 256 256"
+        class="swap-off h-6 w-6 fill-current">
+        <path d="M120,40V32a8,8,0,0,1,16,0v8a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-8-8A8,8,0,0,0,50.34,61.66Zm0,116.68-8,8a8,8,0,0,0,11.32,11.32l8-8a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l8-8a8,8,0,0,0-11.32-11.32l-8,8A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l8,8a8,8,0,0,0,11.32-11.32ZM40,120H32a8,8,0,0,0,0,16h8a8,8,0,0,0,0-16Zm88,88a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0v-8A8,8,0,0,0,128,208Zm96-88h-8a8,8,0,0,0,0,16h8a8,8,0,0,0,0-16Z" fill="currentColor" stroke="currentColor" />
+      </svg>
+    </label>
   </div>
-</div>
+</header>

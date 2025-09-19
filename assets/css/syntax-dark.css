@@ -1,6 +1,6 @@
 /* Generated using: hugo gen chromastyles --style=catppuccin-mocha */
 
-/* Background */ .bg { color:#cdd6f4;background-color:#1e1e2e; }
+/* Background .bg */ { color:#cdd6f4;background-color:#1e1e2e; }
 /* PreWrapper */ .chroma { color:#cdd6f4;background-color:#1e1e2e; }
 /* Other */ .chroma .x {  }
 /* Error */ .chroma .err { color:#f38ba8 }

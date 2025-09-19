@@ -1,26 +1,35 @@
-// Light / Dark theme toggle
+// Light / Dark theme setup and toggling
 (function () {
   const defaultTheme = "{{ site.Params.theme.default | default `system`}}";
-  const themeButtons = document.querySelectorAll("button[theme-toggle]");
-  const setTheme = function (isDark) {
-    const theme = isDark ? "dark" : "light";
-    localStorage.theme = theme;
-    document.documentElement.setAttribute("theme", theme);
+  const themes = new Set(["system", "light", "dark"]);
+  const themeToggles = document.querySelectorAll("[theme-toggle]");
+  
+  const getTheme = function (isDark) {
+    return (isDark === true || isDark === "dark") ? "dark" : "light"
   };
 
-  // change theme to current value in localStorage
-  setTheme(
-    localStorage.theme === "dark" ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches),
-  );
+  const getMediaTheme = function () {
+    return getTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+  };
+
+  const setSiteTheme = function (theme) {
+    document.documentElement.setAttribute("data-theme", getTheme(theme));
+  };
+
+  // initialization of theme on load
+  let theme = (t = localStorage.theme) ? t : defaultTheme;
+  if (!themes.has(theme)) { theme = "system"; }
+
+  setSiteTheme(theme === "system" ? getMediaTheme() : theme);
+  localStorage.theme = theme;
 
   // add click event handler to the buttons
-  themeButtons.forEach((el) => {
-    el.addEventListener("click", function () {
-      const themeAttr = document.documentElement.attributes.getNamedItem("theme");
-      const theme = themeAttr ? themeAttr.value : "dark";
-      setTheme(theme === "light");
+  themeToggles.forEach((el) => {
+    el.addEventListener("change", function () {
+      const theme = el.checked ? "light" : "dark";
+      
+      setSiteTheme(theme);
+      localStorage.theme = theme;
     });
   });
 
@@ -28,8 +37,8 @@
   window
     .matchMedia("(prefers-color-scheme: dark)")
     .addEventListener("change", (e) => {
-      if (defaultTheme === "system" && !("theme" in localStorage)) {
-        setTheme(e.matches);
-      }
+      if (!localStorage.theme) { localStorage.theme = "system"; }
+      if (localStorage.theme === "system") { setSiteTheme(getTheme(e.matches)); }
     });
 })();
+
