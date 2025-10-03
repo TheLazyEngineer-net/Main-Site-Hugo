@@ -1,0 +1,23 @@
+<label class="basis-4 self-center swap h-48 text-secondary-content bg-secondary rounded-{{ .side }}">
+  <input type="checkbox" id="{{ .checkboxId }}" checked/>
+
+  <svg xmlns="http://www.w3.org/2000/svg"
+       class="{{ if (eq .side "l") }}swap-off{{ else }}swap-on{{ end}} fill-current"
+       width="16"
+       height="16"
+       viewBox="0 0 512 512">
+    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M328 112L184 256l144 144"/>
+  </svg>
+
+  <svg xmlns="http://www.w3.org/2000/svg"
+       class="{{ if (eq .side "l") }}swap-on{{ else }}swap-off{{ end}} fill-current"
+       width="16"
+       height="16"
+       viewBox="0 0 512 512">
+    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M184 112l144 144-144 144"/>
+  </svg>
+</label>
+
+{{- define "renderSVGs" }}
+
+{{- end }}

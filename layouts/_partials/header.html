@@ -1,59 +1,61 @@
-<header class="navbar sticky top-0 z-50 bg-base-300">
-  <div class="navbar-start">
-    <div class="dropdown">
-      <div tabindex="0" role="button" class="btn btn-ghost md:hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
-        </svg>
+<header class="flex justify-center sticky top-0 z-50 bg-base-300">
+  <div class="navbar w-full max-w-7xl">
+    <div class="navbar-start">
+      <div class="dropdown">
+        <div tabindex="0" role="button" class="btn btn-ghost md:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+          </svg>
+        </div>
+        <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box">
+          {{- partial "navbar.html" (dict "page" . "menuEntries" site.Menus.main) }}
+        </ul>
       </div>
-      <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box">
+      <a class="btn btn-ghost tracking-tight font-bold text-nowrap text-xl md:text-2xl text-primary" href="https://thelazyengineer.net">
+        TheLazyEngineer
+      </a>
+    </div>
+
+    <div class="navbar-center hidden md:flex">
+      <ul class="menu menu-horizontal menu-lg font-bold text-accent">
         {{- partial "navbar.html" (dict "page" . "menuEntries" site.Menus.main) }}
       </ul>
     </div>
-    <a class="btn btn-ghost tracking-tight font-bold text-nowrap text-2xl text-primary" href="https://thelazyengineer.net">
-      TheLazyEngineer
-    </a>
-  </div>
-  
-  <div class="navbar-center hidden md:flex">
-    <ul class="menu menu-horizontal menu-lg font-bold text-accent">
-      {{- partial "navbar.html" (dict "page" . "menuEntries" site.Menus.main) }}
-    </ul>
-  </div>
-  
-  <div class="navbar-end flex gap-2">
-    <label class="input input-sm">
-      <svg
-        class="w-4 h-4 text-text"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 20 20">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-      </svg>
-      <input type="search" class="grow" placeholder="Search" />
-      <kbd class="kbd kbd-sm">⌘</kbd>
-      <kbd class="kbd kbd-sm">K</kbd>
-    </label>
-    <label class="btn btn-primary btn-sm swap swap-rotate">
-      <input theme-toggle type="checkbox" />
-    
-      <!-- sun icon -->
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 256 256"
-        class="swap-on h-6 w-6 fill-current">
-        <rect width="256" height="256" fill="none"/>
-        <path d="M108.11,28.11A96.09,96.09,0,0,0,227.89,147.89,96,96,0,1,1,108.11,28.11Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
-      </svg>
-    
-      <!-- moon icon -->
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 256 256"
-        class="swap-off h-6 w-6 fill-current">
-        <path d="M120,40V32a8,8,0,0,1,16,0v8a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-8-8A8,8,0,0,0,50.34,61.66Zm0,116.68-8,8a8,8,0,0,0,11.32,11.32l8-8a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l8-8a8,8,0,0,0-11.32-11.32l-8,8A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l8,8a8,8,0,0,0,11.32-11.32ZM40,120H32a8,8,0,0,0,0,16h8a8,8,0,0,0,0-16Zm88,88a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0v-8A8,8,0,0,0,128,208Zm96-88h-8a8,8,0,0,0,0,16h8a8,8,0,0,0,0-16Z" fill="currentColor" stroke="currentColor" />
-      </svg>
-    </label>
+
+    <div class="navbar-end flex gap-2">
+      <label class="input input-sm gap-0">
+        <svg
+          class="w-4 h-4 mr-2"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 20 20">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+        </svg>
+        <input type="search" class="grow" placeholder="Search" />
+        <kbd class="kbd kbd-sm ">⌘</kbd>
+        <kbd class="kbd kbd-sm ">K</kbd>
+      </label>
+      <label class="btn dark:btn-primary btn-accent btn-sm swap swap-rotate">
+        <input theme-toggle type="checkbox" />
+
+        <!-- sun icon -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 256 256"
+          class="swap-off h-6 w-6 fill-current">
+          <rect width="256" height="256" fill="none"/>
+          <path d="M108.11,28.11A96.09,96.09,0,0,0,227.89,147.89,96,96,0,1,1,108.11,28.11Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+        </svg>
+
+        <!-- moon icon -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 256 256"
+          class="swap-on h-6 w-6 fill-current">
+          <path d="M120,40V32a8,8,0,0,1,16,0v8a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-8-8A8,8,0,0,0,50.34,61.66Zm0,116.68-8,8a8,8,0,0,0,11.32,11.32l8-8a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l8-8a8,8,0,0,0-11.32-11.32l-8,8A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l8,8a8,8,0,0,0,11.32-11.32ZM40,120H32a8,8,0,0,0,0,16h8a8,8,0,0,0,0-16Zm88,88a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0v-8A8,8,0,0,0,128,208Zm96-88h-8a8,8,0,0,0,0,16h8a8,8,0,0,0,0-16Z" fill="currentColor" stroke="currentColor" />
+        </svg>
+      </label>
+    </div>
   </div>
 </header>

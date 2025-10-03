@@ -1,0 +1,8 @@
+{{- $u := urls.Parse .Destination -}}
+{{- $isExternal := strings.HasPrefix $u.Scheme "http" -}}
+<a href="{{ .Destination | safeURL }}"
+   {{- with .Title }} title="{{ . }}"{{ end -}}
+   {{- if $isExternal }} target="_blank" rel="noopener noreferrer"{{ end -}}
+>
+  {{- with .Text | safeHTML }}{{ . }}{{ if $isExternal }}&#x1F517;{{ end }}{{ end -}}
+</a>

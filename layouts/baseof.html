@@ -3,13 +3,17 @@
   <head>
     {{ partial "head.html" . -}}
   </head>
-  <body class="flex flex-col min-w-sm min-h-screen font-primary">
+
+  <body class="flex flex-col min-w-sm min-h-screen font-primary bg-base-100 text-content">
     {{ partial "header.html" . -}}
 
-    <main data-pagefind-body class="self-center flex max-w-4xl p-8">
+    <main data-pagefind-body class="flex-1 flex flex-col items-center my-8">
       {{ block "main" . }}{{ end -}}
     </main>
 
     {{ partial "footer.html" . -}}
+
+    {{ partial "js/theme.html" . -}}
+    {{ partial "js/search.html" . -}}
   </body>
 </html>

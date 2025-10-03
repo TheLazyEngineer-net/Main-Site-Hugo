@@ -1,20 +1,9 @@
 {{- /*
-  Derived from: https://github.com/docker/docs/blob/2ddbdf9095eac8007d430f26acb0749d0fc7be78/layouts/partials/sidebar/sections.html
-  This is part of the Docker documentation website.
-  I removed Alpine.js and a bunch of their logic.
+  Generates the list items (<li>) of a DaisyUI menu for the children of a given page.
+*/ -}}
+{{ template "renderChildren" . }}
 
-  Highlights:
-  - Supports hierarchical navigation with collapsible sections (`renderList` template).
-  - Dynamically applies current page highlighting and expanded states.
-  */
--}}
-<!-- section tree -->
-<nav class="flex flex-col items-start min-w-48 text-sm">
-  <ul class="m-0 p-0 border">
-    {{ template "renderChildren" . }}
-  </ul>
-</nav>
-
+{{/* Recursive template for sidebar items */}}
 {{ define "renderChildren" }}
   {{- range .Sections }}
     {{- template "renderSection" . }}
@@ -24,48 +13,37 @@
   {{- end }}
 {{ end }}
 
-{{/* Recursive template for sidebar items */}}
 {{ define "renderSection" }}
   {{ $isCurrent := eq page . }}
   {{ $expanded := or $isCurrent (page.IsDescendant .) }}
-  <li class="collapse">
-      <!-- Expand group button -->
-      <!-- <button class="text-hyperlink">
-        <span class="{{ if $expanded }}hidden{{ end }}">
-          {{ partialCached "icon" "expand-down" }}
-        </span>
-        <span class="{{ if not $expanded }}hidden{{ end }}">
-          {{ partialCached "icon" "expand-up" }}
-        </span>
-      </button>-->
-    <input type="checkbox" />
-    <div class="collapse-title">
-      {{- if .Permalink }}
-        {{/* If the link is not empty, use it */}}
-        <a class="" href="{{ .Permalink }}">
-          {{ .LinkTitle }}
-        </a>
-      {{- else }}
-        {{/* Otherwise, just expand the section */}}
-        <span class="">
-         {{ .LinkTitle }}
-        </span>
-      {{- end }}
-    </div>
-    <div class="collapse-content">
+  <li class="">
+    <details{{ if $expanded }} open{{ end }}>
+      <summary class="{{ if $isCurrent }}menu-active{{ end }} font-bold">
+        {{- if .Permalink }}
+          {{/* If the link is not empty, use it */}}
+          <a class="" href="{{ .Permalink }}">
+            {{ .LinkTitle }}
+          </a>
+        {{- else }}
+          {{/* Otherwise, just expand the section */}}
+          <span class="">
+            {{ .LinkTitle }}
+          </span>
+        {{- end }}
+      </summary>
       <ul class="">
         {{ template "renderChildren" . }}
       </ul>
-    </div>
+    </details>
   </li>
 {{ end }}
 
 {{ define "renderPage" }}
   {{ $isCurrent := eq page . }}
-  <div class="">
-    <a {{ if $isCurrent }}aria-current="page" {{ end }}class="block w-full truncate" href="{{ .Permalink }}" title="{{ .LinkTitle }}">
+  <li class="">
+    <a class="{{ if $isCurrent }}menu-active{{ end }}" href="{{ .Permalink }}" title="{{ .LinkTitle }}">
       {{ .LinkTitle }}
     </a>
-  </div>
+  </li>
 {{ end }}
 

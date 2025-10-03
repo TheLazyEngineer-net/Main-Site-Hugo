@@ -1,0 +1,40 @@
+{{- /*
+  Generates the table of contents for a given page.
+*/ -}}
+
+{{- with .Fragments }}
+  {{- with .Headings }}
+    <ol data-pagefind-ignore="all"
+        id="toc-nav"
+        class="menu menu-sm">
+      {{- range . }}
+        {{ template "renderHeading" . }}
+      {{- end }}
+    </ol>
+  {{- end }}
+{{- end }}
+
+{{/* Recursive template for table of contents items */}}
+{{- define "renderHeading" }}
+  {{- $minLevel := 2 }}
+  {{- $maxLevel := 3 }}
+  {{- $level := .Level }}
+  {{- if le $level $maxLevel }}
+    {{- if ge $level $minLevel }}
+      <li>
+        <a href="#{{ .ID }}">{{ .Title }}</a>
+        {{- with .Headings }}
+        <ol>
+          {{- range . }}
+            {{ template "renderHeading" . }}
+          {{- end }}
+        </ol>
+        {{- end }}
+      </li>
+    {{- else }}
+      {{- range .Headings }}
+        {{ template "renderHeading" . }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{ end }}

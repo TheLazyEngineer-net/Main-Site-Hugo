@@ -1,16 +1,11 @@
-{{- $page := .page -}}
-
-{{- with $page -}}
-  <div class="flex flex-col mb-2">
-    <h2 class="mb-1">
-      <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
-    </h2>
-    {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-    {{ $dateHuman := .Date | time.Format ":date_long" }}
-    <time datetime="{{ $dateMachine }}" class="italic">{{ $dateHuman }}</time>
-  </div>
-
-  <article class="">
+<a class="flex flex-col p-4 rounded-xl bg-base-100 shadow-md" href="{{ .RelPermalink }}">
+  <div class="flex w-full">
+    <div class="flex-1 self-center">
+      <h2 class="text-xl font-bold">{{ .Title }}</h2>
+      {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+      {{ $dateHuman := .Date | time.Format ":date_long" }}
+      <time datetime="{{ $dateMachine }}" class="text-sm italic">{{ $dateHuman }}</time>
+    </div>
     {{ with .Param "featuredImage" }}
       {{ with resources.Get . }}
         {{ $image := . }}
@@ -18,14 +13,13 @@
           {{ $image := .Process "fit 128x128" }}
         {{ end }}
 
-        <figure class="float-left mr-4">
-          <img src="{{ $image.RelPermalink }}" width=128 height=128 class="bg-stone-400 dark:bg-stone-300 rounded-lg p-1">
+        <figure class="">
+          <img src="{{ $image.RelPermalink }}" class="h-24" />
         </figure>
       {{ end }}
     {{ end }}
-
-    {{ .Summary }}
-  </article>
-{{ else }}
-
-{{ end }}
+  </div>
+  <div class="prose-sm max-w-none">
+    {{ .Summary | plainify }}
+  </div>
+</a>

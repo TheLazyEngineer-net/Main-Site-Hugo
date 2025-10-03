@@ -1,13 +1,9 @@
 {{ define "main" }}
-  <div data-pagefind-ignore="all" class="flex gap-2">
-    {{- with .GetPage "/docs" -}}
-      {{ partial "sidebar/sections.html" . }}
-    {{- end -}}
-    <div>
-      <h1 class="mb-8">{{ .Title }}</h1>
-      <div>
-        {{ .Content }}
-      </div>
-    </div>
+<div class="">
+  <h1 class="text-center text-3xl font-bold">{{ .Title }}</h1>
+  <hr class="border my-6 px-10"/>
+  <div class="prose max-w-full">
+    {{ .Content }}
   </div>
+</div>
 {{ end }}

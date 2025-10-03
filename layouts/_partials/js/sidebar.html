@@ -1,0 +1,11 @@
+{{- with resources.Get "js/sidebar.js" }}
+  {{- if hugo.IsDevelopment }}
+    <script src="{{ .RelPermalink }}">
+  {{- else }}
+    {{ $s := . | fingerprint -}}
+    <script src="{{ $s.RelPermalink }}" integrity="{{ $s.Data.Integrity }}" crossorigin="anonymous">
+  {{- end }}
+    autoHideNav("docs-nav", "docs-checkbox");
+    autoHideNav("toc-nav", "toc-checkbox");
+  </script>
+{{- end }}

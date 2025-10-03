@@ -3,9 +3,13 @@
   const defaultTheme = "{{ site.Params.theme.default | default `system`}}";
   const themes = new Set(["system", "light", "dark"]);
   const themeToggles = document.querySelectorAll("[theme-toggle]");
-  
-  const getTheme = function (isDark) {
-    return (isDark === true || isDark === "dark") ? "dark" : "light"
+
+  const isDark = function (val) {
+    return val === true || val === "dark";
+  };
+
+  const getTheme = function (val) {
+    return isDark(val) ? "dark" : "light";
   };
 
   const getMediaTheme = function () {
@@ -14,11 +18,14 @@
 
   const setSiteTheme = function (theme) {
     document.documentElement.setAttribute("data-theme", getTheme(theme));
+    themeToggles.forEach((e) => (e.checked = isDark(theme)));
   };
 
   // initialization of theme on load
   let theme = (t = localStorage.theme) ? t : defaultTheme;
-  if (!themes.has(theme)) { theme = "system"; }
+  if (!themes.has(theme)) {
+    theme = "system";
+  }
 
   setSiteTheme(theme === "system" ? getMediaTheme() : theme);
   localStorage.theme = theme;
@@ -26,10 +33,8 @@
   // add click event handler to the buttons
   themeToggles.forEach((el) => {
     el.addEventListener("change", function () {
-      const theme = el.checked ? "light" : "dark";
-      
-      setSiteTheme(theme);
-      localStorage.theme = theme;
+      setSiteTheme(el.checked);
+      localStorage.theme = getTheme(el.checked);
     });
   });
 
@@ -37,8 +42,11 @@
   window
     .matchMedia("(prefers-color-scheme: dark)")
     .addEventListener("change", (e) => {
-      if (!localStorage.theme) { localStorage.theme = "system"; }
-      if (localStorage.theme === "system") { setSiteTheme(getTheme(e.matches)); }
+      if (!localStorage.theme) {
+        localStorage.theme = "system";
+      }
+      if (localStorage.theme === "system") {
+        setSiteTheme(getTheme(e.matches));
+      }
     });
 })();
-

@@ -3,5 +3,10 @@
 <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title site.Title }}{{ end }}</title>
 {{- with (templates.Defer (dict "key" "global")) -}}
   {{- partial "head/css.html" . -}}
-  {{- partial "head/js.html" . -}}
+{{- end -}}
+
+{{- $imports := .Store.Get "extra-imports" -}}
+{{- $context := . -}}
+{{- range $imports -}}
+  {{- partial . $context -}}
 {{- end -}}

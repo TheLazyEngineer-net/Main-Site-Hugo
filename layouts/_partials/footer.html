@@ -1,33 +1,35 @@
-<footer class="footer footer-horizontal footer-center bg-base-300 p-2">
-  <p class="flex">
-    <span class="whitespace-nowrap">Built with:</span>
-    <a href="https://gohugo.io/">
-      {{- with resources.Get "/svg/logo/hugo.svg" -}}
-        <img src="{{ .RelPermalink }}" alt="Hugo Logo" class="h-6">
-      {{- end -}}
-    </a>
-    <a href="https://tailwindcss.com">
-      {{- with resources.Get "/svg/logo/tailwind.svg" -}}
-        <img src="{{ .RelPermalink }}" alt="DaisyUI Logo" class="dark:hidden h-4">
-      {{- end -}}
-      {{- with resources.Get "/svg/logo/tailwind-dark.svg" -}}
-        <img src="{{ .RelPermalink }}" alt="DaisyUI Logo" class="hidden dark:block h-4">
-      {{- end -}}
-    </a>
-    <a href="https://daisyui.com">
-      {{- with resources.Get "/svg/logo/daisyui.svg" -}}
-        <img src="{{ .RelPermalink }}" alt="DaisyUI Logo" class="dark:hidden h-8">
-      {{- end -}}
-      {{- with resources.Get "/svg/logo/daisyui-dark.svg" -}}
-        <img src="{{ .RelPermalink }}" alt="DaisyUI Logo" class="hidden dark:block h-8">
-      {{- end -}}
-    </a>
-    <span class="whitespace-nowrap">and marginal engineering.</span>
-  </p>
-</footer>
-<footer class="footer footer-horizontal footer-center bg-base-300 p-2">
-  {{- $year := now.Year -}}
-  <p class="">
-    Copyright &copy; Jared Suess 2025 {{- if gt $year 2025 -}} - {{- $year -}} {{- end }}. All rights reserved.
-  </p>
-</footer>
+<div class="flex flex-col items-center gap-2 w-full p-2 bg-base-300">
+  <footer class="footer footer-horizontal footer-center">
+    <p class="flex">
+      <span class="whitespace-nowrap">Built with:</span>
+      <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">
+        {{- with resources.Get "/svg/logo/hugo.svg" -}}
+          <img src="{{ .RelPermalink }}" alt="Hugo Logo" class="h-6">
+        {{- end -}}
+      </a>
+      <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer">
+        {{- with resources.Get "/svg/logo/tailwind.svg" -}}
+          <img src="{{ .RelPermalink }}" alt="DaisyUI Logo" class="dark:hidden h-4">
+        {{- end -}}
+        {{- with resources.Get "/svg/logo/tailwind-dark.svg" -}}
+          <img src="{{ .RelPermalink }}" alt="DaisyUI Logo" class="hidden dark:block h-4">
+        {{- end -}}
+      </a>
+      <a href="https://daisyui.com" target="_blank" rel="noopener noreferrer">
+        {{- with resources.Get "/svg/logo/daisyui.svg" -}}
+          <img src="{{ .RelPermalink }}" alt="DaisyUI Logo" class="dark:hidden h-8">
+        {{- end -}}
+        {{- with resources.Get "/svg/logo/daisyui-dark.svg" -}}
+          <img src="{{ .RelPermalink }}" alt="DaisyUI Logo" class="hidden dark:block h-8">
+        {{- end -}}
+      </a>
+      <span class="whitespace-nowrap">and marginal engineering.</span>
+    </p>
+  </footer>
+  <footer class="footer footer-horizontal footer-center">
+    {{- $year := now.Year -}}
+    <p class="">
+      Copyright &copy; Jared Suess 2025 {{- if gt $year 2025 -}} - {{- $year -}} {{- end }}. All rights reserved.
+    </p>
+  </footer>
+</div>

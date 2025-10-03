@@ -1,8 +1,9 @@
 {{ define "main" }}
-  <div data-pagefind-ignore="all">
-    <h1 class="mb-8">{{ .Title }}</h1>
-    <div>
-      {{ .Content }}
-    </div>
+<div class="max-w-full">
+  <h1 class="text-center text-3xl font-bold">{{ .Title }}</h1>
+  <hr class="border w-11/12 my-6"/>
+  <div class="prose max-w-full">
+    {{ .Content }}
   </div>
+</div>
 {{ end }}

@@ -1,4 +1,4 @@
 +++
 title = 'Opinion Posts'
-summary = 'A public collection of subjective ideas and best practices'
+summary = 'Articles about technology, programming, automation, and related topics.'
 +++

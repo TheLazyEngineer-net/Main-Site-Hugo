@@ -1,16 +1,16 @@
 {{ define "main" }}
-  <div class="flex flex-col items-center prose md:prose-lg max-w-none">
-    <div class="flex flex-col">
-      <h1 class="self-start">{{ .Title }}</h1>
+  <div class="flex flex-col items-center w-full max-w-4xl bg-base-200 p-4 md:p-8 rounded-2xl">
+    <div class="flex flex-col gap-2">
+      <h1 class="self-start text-4xl text-secondary font-bold">{{ .Title }}</h1>
 
       {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
       {{ $dateHuman := .Date | time.Format ":date_long" }}
-      <time datetime="{{ $dateMachine }}" class="self-end pr-4 italic">{{ $dateHuman }}</time>
+      <time datetime="{{ $dateMachine }}" class="self-end opacity-70 italic">{{ $dateHuman }}</time>
     </div>
 
-    <hr class="w-2/3">
+    <hr class="w-11/12 my-6">
 
-    <article>
+    <article class="prose md:prose-lg max-w-full">
       {{ .Content }}
     </article>
 

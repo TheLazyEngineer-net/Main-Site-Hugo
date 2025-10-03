@@ -1,27 +1,33 @@
 +++
-title = 'About Page'
+title = 'About TheLazyEngineer'
 +++
 
 ### Site Purpose
 
-1. Keep missing and hard-to-find technical documentation somewhere (if I care about it) ([Docs](/docs))
-2. Put to words the reasons behind the opinions that drive my technology decisions ([Posts](/posts))
+1. Archive/orgainize neglected technical documentation -- [Docs](/docs)
+2. Practice writing technical blogs -- [Posts](/posts)
 3. Learn to build a static website
 
-### Lazy Definition
+### Definition of Lazy
 
-The definition of the word *'lazy'* on this site is largely the same as we use in [programming](https://en.wikipedia.org/wiki/Lazy_evaluation): work is not performed until it is required (ideally never) and is only performed once.  You might think this is a given, but it is not in most computer languages.  The compiler can often optimize out unused code, but, again, often doesn't for good reasons.  Lazy evaluation is often manually implemented in cases where an expensive (time-consuming) resource, like the network or a hard drive, may or may not need to be used.  Initializing these resources is often also expensive and error prone, so avoiding that work, when possible, is a nice feature.
+The word *'lazy'* on this site has a meaning in the same spirit as in [programming](https://en.wikipedia.org/wiki/Lazy_evaluation): delay work until required and do the work only as often as necessary (ideally once).
 
-Another way to say this is: there is already more than enough work to do, don't add more work unless necessary.  One should also eliminate time consuming, repetitive work, if possible, since it is rarely of greater value than some other, available work.  Embracing this laziness allows for the opening up of time for more useful things like community, learning, and building (or more CPU cycles and RAM).  Some good examples of this spirit of laziness are the washing machine, nail guns, and the printing press.
+You might think that this is a given in computer programs, but that's not how they generally work.  In most programs, many things are initialized when the program starts: connections to remote sites and databases are established, background processes are started, files are opened for use, initial state loaded, etc.  This is the delay that we notice when we open up a large application.  To speed up this startup time, lazy evaluation is often added for components that might not need to be initialized, so that the delay happens when the component is used.
 
-### Site Background
+Another way to think of this meaning of "lazy" is: there is already more than enough work to do, so don't add more work unless necessary.  Try to eliminate time consuming, repetitive work since it is rarely of greater value than some other, available work.  Embracing this laziness opens up time for more useful things (or allows for more avaiable CPU cycles and RAM in computers).  This spirit of laziness can be seen in all human tools.  We created the wheel to avoid repeated trips.  We created the washing machine to save days of hand-washing cloths.  We created computers to save millennia of manual calculations.
 
-I am a programmer, so that's what I know fairly well.  However, I have always been paid to do backend work using "real" languages like C++, C#, or Java.  I then spend my free-time learning languages like Elixir, Go, Nix, and Rust.  What this means is that making a website is immensely challenging for me.  The most time that I've spent in this space is making json HTTP APIs for the front-end to consume.  I don't know what most HTML elements are or what they should be used for.  Getting something centered on a page can be a twenty minute excursion into the finer points of flexboxes.  CSS makes me contemplate murder.
+Humans are lazy by nature, and that impulse keeps us moving forward so that we can avoid even more work.
 
-All of this is to say that I have great respect for the engineers/programmers who put up with this daily and have worked tirelessly to make the web a less painful place.  Thank you all for getting us here.  This is also to say that you probably shouldn't use my website as a good example for how to make a website.  I am a monkey at a keyboard when it comes to this stuff.
+### Background
+
+I am a programmer, so that is my primary domain of knowledge at this point.  I have always been paid to do backend work using languages like C++, C#, or Java.  In my free time, I spent time with newer languages that peaked my fancy, like Elixir, Go, and Rust.  Beyond programming, I also know quite a bit about systems administration and computer hardware.  More recently, I become interested in electronics, microcontrollers, and circuit design.
+
+When it comes to the web realm of programming, I am a luddite.  I have never been paid a salary to touch Javascript (in fact I made it clear a few times that I would prefer not to touch it).  The most time that I've spent in this space is making JSON HTTP APIs for the front-end because they needed some data presented in a different way.  I don't know what most HTML elements are or what they should be used for.  Javascript seems like an inside joke for programmers that went awry.  Getting something positioned where I want on a site can be a twenty minute excursion into the finer points of flexboxes, making me question at least three times whether I should have use grids.
+
+All of this is to say that I have great respect for the engineers/programmers who put up with this daily and have worked tirelessly to make the web a reasonably nice place to operate.  Thank you all for getting us here.  This is also to say that you probably shouldn't use my website as a good example for how to make a website.  There are many people far more qualified; I am a monkey at a keyboard in this domain.
 
 ### Privacy
 
-Privacy will always be respected on this site.  I will not knowingly install any trackers or cookies for gathering personal information.  There are currently no analytics on this site, though a privacy respecting form may be installed at some point as a side project.
+Privacy will always be respected on this site.  Currently, no site analytics have been added.  If site-analytics are added, then the details will be laid out here.
 
-### *Thank you for visiting my website.*
+#### *Thank you for visiting my website.  I hope you found something useful.*

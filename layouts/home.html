@@ -1,11 +1,39 @@
 {{- define "main" -}}
-  <div data-pagefind-ignore="all" class="flex flex-col items-center prose max-w-none">
-    <h1>Recent Posts</h1>
-    <hr class="collapse sm:visible border-2 w-11/12 mx-auto my-2" />
-    {{- with site.GetPage "/posts" -}}
-      {{- range .Pages -}}
-        {{- partial "post-summary.html" (dict "page" .) -}}
-      {{- end -}}
-    {{- end -}}
+<div data-pagefind-ignore="all" class="place-self-center flex flex-col items-center gap-8 max-w-4xl bg-base-200 p-8 rounded-2xl">
+  <div class="text-secondary flex flex-col gap-2">
+    <h1 class="text-2xl md:text-4xl font-extrabold">TheLazyEngineer Homepage</h1>
+    <h2 class="text-lg font-extralight italic">Documentation and Blog Posts</h2>
   </div>
+
+  <div class="prose md:prose-lg">
+    <blockquote>
+      <h4>Hlade's Law:</h4>
+      <p>If you have a difficult task give it to a lazy man — he will find an easier way to do it.</p>
+      <footer class="text-right">- <cite>Arthur Bloch</cite></footer>
+    </blockquote>
+  </div>
+
+  <ul class="menu menu-lg w-full bg-base-300 rounded-xl">
+    <li>
+      <h2 class="menu-title text-base-content text-3xl font-bold opacity-60">Documentation</h2>
+      <ul>
+        {{- with .GetPage "/docs" -}}
+          {{ partial "sidebar/sections.html" . }}
+        {{- end -}}
+      </ul>
+    </li>
+  </ul>
+
+  <div class="collapse collapse-arrow bg-base-300">
+    <input type="checkbox" checked />
+    <div class="collapse-title text-3xl font-bold pl-8 opacity-60">Recent Posts</div>
+    <div class="collapse-content flex flex-col items-center gap-4">
+      {{- with site.GetPage "/posts" -}}
+        {{- range .Pages -}}
+          {{- partial "post-summary.html" . -}}
+        {{- end -}}
+      {{- end -}}
+    </div>
+  </div>
+</div>
 {{- end -}}
