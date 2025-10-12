@@ -1,3 +1,4 @@
 +++
-title = 'Search Site'
+title = 'Search Site Resources'
+name = 'Search'
 +++

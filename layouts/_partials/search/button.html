@@ -1,0 +1,23 @@
+{{- with resources.Get "svg/magnifying-glass.svg" }}
+  <button search-modal-button class="btn btn-sm btn-soft btn-primary px-3">
+    <div class="w-5 h-5">
+      {{- .Content | safe.HTML }}
+    </div>
+    <kbd class="kbd font-mono font-bold opacity-80">
+      <span class="me-1">Cmd</span>K
+    </kbd>
+  </button>
+  <dialog id="my_modal_1" class="modal">
+    <div class="modal-box">
+      <h3 class="text-lg font-bold">Hello!</h3>
+      {{- partial "search/bar.html" }}
+      <p class="py-4">Press ESC key or click the button below to close</p>
+      <div class="modal-action">
+        <form method="dialog">
+          <!-- if there is a button in form, it will close the modal -->
+          <button class="btn">Close</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+{{- end }}

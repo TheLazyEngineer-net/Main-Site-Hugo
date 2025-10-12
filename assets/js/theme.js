@@ -1,8 +1,10 @@
 // Light / Dark theme setup and toggling
 (function () {
-  const defaultTheme = "{{ site.Params.theme.default | default `system`}}";
+  const defaultTheme = '{{ site.Params.theme.default | default "system"}}';
   const themes = new Set(["system", "light", "dark"]);
-  const themeToggles = document.querySelectorAll("[theme-toggle]");
+  const themeToggles = document.querySelectorAll(
+    'input[theme-toggle][type="checkbox"]',
+  );
 
   const isDark = function (val) {
     return val === true || val === "dark";
@@ -12,12 +14,9 @@
     return isDark(val) ? "dark" : "light";
   };
 
-  const getMediaTheme = function () {
-    return getTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
-  };
-
-  const setSiteTheme = function (theme) {
+  const setPageTheme = function (theme) {
     document.documentElement.setAttribute("data-theme", getTheme(theme));
+    // Note: checked checkbox => dark mode
     themeToggles.forEach((e) => (e.checked = isDark(theme)));
   };
 
@@ -27,13 +26,17 @@
     theme = "system";
   }
 
-  setSiteTheme(theme === "system" ? getMediaTheme() : theme);
+  setPageTheme(
+    theme !== "system"
+      ? theme
+      : getTheme(window.matchMedia("(prefers-color-scheme: dark)").matches),
+  );
   localStorage.theme = theme;
 
   // add click event handler to the buttons
   themeToggles.forEach((el) => {
     el.addEventListener("change", function () {
-      setSiteTheme(el.checked);
+      setPageTheme(el.checked);
       localStorage.theme = getTheme(el.checked);
     });
   });
@@ -46,7 +49,7 @@
         localStorage.theme = "system";
       }
       if (localStorage.theme === "system") {
-        setSiteTheme(getTheme(e.matches));
+        setPageTheme(getTheme(e.matches));
       }
     });
 })();

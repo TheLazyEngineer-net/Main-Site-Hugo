@@ -1,31 +1,21 @@
 baseURL = 'https://thelazyengineer.net/'
 languageCode = 'en-us'
-title = 'The Lazy Engineer'
+title = 'TheLazyEngineer'
 since = '2025'
 
-[menus]
-  [[menus.main]]
-    name = 'Home'
-    pageRef = '/'
-    weight = 10
-  [[menus.main]]
-    name = 'Posts'
-    pageRef = '/posts'
-    weight = 20
-  [[menus.main]]
-    name = 'Docs'
-    pageRef = '/docs'
-    weight = 30
-  [[menus.main]]
-    name = 'About'
-    pageRef = '/about'
-    weight = 40
+[taxonomies]
+  author = 'authors'
+  tag = 'tags'
 
 [pagination]
   pagerSize = 1
   path = 'page'
 
 [markup]
+  [markup.goldmark]
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
+        block = true
   [markup.highlight]
     noClasses = false
 

@@ -1,6 +1,10 @@
 +++
 title = 'Technology Documentation'
 summary = 'Collection of hard-to-find technical documentation for useful things'
+[menus]
+  [menus.main]
+    name = 'Docs'
+    weight = 20
 +++
 
 ### Introduction

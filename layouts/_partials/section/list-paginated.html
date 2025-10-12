@@ -1,0 +1,4 @@
+{{ $pages := . -}}
+{{ $paginator := .Paginate $pages -}}
+{{ partial "section/list-all.html" $paginator.Pages -}}
+{{- partial "pagination.html" . }}

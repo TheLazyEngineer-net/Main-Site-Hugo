@@ -1,11 +1,16 @@
 +++
 title = 'Victron MQTT Is Simpler With Node-Red'
 date = '2025-08-05'
+authors = ['Jared Suess']
+description = 'It is much easier to set up MQTT on Victron with NodeRed'
+tags = ['Battery Backup', 'MQTT', 'NodeRed', 'Victron']
 [params]
   featuredImage = 'svg/logo/mqtt.svg'
 +++
 
-MQTT is a messaging protocol that has been around for decades within the automation space.  
+Using MQTT for communication with Victron products can be difficult.  NodeRed can surprisingly simplify combining MQTT, Victron, and Home Assistant.
+
+<!--more-->
 
 [Victron Energy](https://www.victronenergy.com/) is a private Dutch, company that makes power inverters, solar charge controllers, and various other devices associated with off-grid energy systems.  Their systems are often found in boats, RVs, vanlifer vans, and homes.  They were one of the first companies that I discovered when I began looking into power inverters.  After doing much more research, I decided to go with their produts to create a couple of energy backup systems for my home.  A big part of the reason that I decided to go with Victron was that they have a philosophy close to my heart: they believe in making reliable products that last for decades.  The other main reason was that I am rather obsessed with Home Assistant.  My choice of system would have to integrate into Home Assistant, and Victron had a way to enable MQTT publishing.  MQTT is a common way to integrate devices into Home Assistant, so I thought this would be an easy way forward.  Unfortunately, that is not what I found.  .
 
@@ -54,3 +59,4 @@ My current setup now has this flow of information: Cerbo GX dbus -> Node-Red -> 
 A quick note: I tried the Home Assistant Node-Red palette (plugin) and found it slow and cumbersome within Node-Red on the Cerbo GX.  One explaination for this is the power of the Cerbo GX itself, I don't know what's in it other than an ESP32 chip for WiFi/Bluetooth.  I also later found out that I had some firewall problems, so that might have been contributing.  Once I figured that I could use MQTT directly in Node-Red and it didn't require another plugin, I didn't see the point of the Home Assistant plugin and removed it.  It requires a token, a bunch of configuration, was a lot slower, and failed a lot more than the MQTT nodes buit into Node-Red.  I'm not saying don't use it, it's probably the best way to add certain things without added configuration into Home Assistant, but I'd approach it skeptically since it seems a little flakier than just publishing on MQTT topics.  I've now use this palette within the Home Assistant add-on since I've mostly moved to Node-Red there as well, and it works great in that context.  It's running on the same machine and pre-configured out of the box, so it's just a better experience.
 
 In summary, my position is now this: using Node-Red within the Cerbo GX to publish data though MQTT is a cleaner way to publish from the Victron system than trying to consume the buitin MQTT data directly.  Using this method, we can have complete control of the information being published, can easily search what information is available, see the real-time state, create a device configuration for the system, and expand into other automation that only affect the Victron system.  Node-Red is a quality product, and using it within the Cerbo GX allows for much greater and customizable expression of the Victron ecosystem.
+`

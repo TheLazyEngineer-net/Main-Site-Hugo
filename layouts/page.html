@@ -1,21 +1,36 @@
+{{ define "head" }}
+  {{ with .GetTerms "authors" }}
+    {{ range . }}
+    <meta name="author" content="{{ .LinkTitle }}">
+    {{ end }}
+  {{ end }}
+{{ end }}
+
 {{ define "main" }}
-  <div class="flex flex-col items-center w-full max-w-4xl bg-base-200 p-4 md:p-8 rounded-2xl">
-    <div class="flex flex-col gap-2">
-      <h1 class="self-start text-4xl text-secondary font-bold">{{ .Title }}</h1>
+<div class="flex flex-col items-center gap-8 w-full max-w-4xl bg-base-200 p-4 md:p-8 rounded-2xl">
+  <div class="flex flex-col gap-2 p-8">
+    <h1 class="self-start text-4xl text-secondary font-bold">{{ .Title }}</h1>
 
-      {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-      {{ $dateHuman := .Date | time.Format ":date_long" }}
-      <time datetime="{{ $dateMachine }}" class="self-end opacity-70 italic">{{ $dateHuman }}</time>
-    </div>
-
-    <hr class="w-11/12 my-6">
-
-    <article class="prose md:prose-lg max-w-full">
-      {{ .Content }}
-    </article>
-
-    <div data-pagefind-ignore="all">
-      {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
-    </div>
+    {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+    {{ $dateHuman := .Date | time.Format ":date_long" }}
+    <time datetime="{{ $dateMachine }}" class="self-end opacity-70 italic">{{ $dateHuman }}</time>
   </div>
+
+  {{ with .Params.quote }}
+  <div data-pagefind-ignore="all" class="prose md:prose-lg">
+    <blockquote>
+      <p>{{ .text }}</p>
+      <footer class="text-right">-<cite>{{ .author }}</cite></footer>
+    </blockquote>
+  </div>
+  {{ end }}
+
+  <article class="prose md:prose-lg max-w-full">
+    {{ .ContentWithoutSummary }}
+  </article>
+
+  <div data-pagefind-ignore="all">
+    {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+  </div>
+</div>
 {{ end }}

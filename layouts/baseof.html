@@ -2,6 +2,7 @@
 <html data-theme="light" lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
   <head>
     {{ partial "head.html" . -}}
+    {{ block "head" . }}{{ end -}}
   </head>
 
   <body class="flex flex-col min-w-sm min-h-screen font-primary bg-base-100 text-content">

@@ -1,9 +1,17 @@
 {{ define "main" }}
-  <div data-pagefind-ignore="all">
-    <h1>{{ .Title }}</h1>
-    {{ .Content }}
-    {{ range .Pages }}
-      <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-    {{ end }}
+<div data-pagefind-ignore="all" class="flex flex-col items-center gap-4 w-full max-w-4xl bg-base-200 p-8 rounded-2xl">
+  <div class="breadcrumbs text-secondary text-2xl md:text-3xl font-extrabold">
+    {{- partial "breadcrumbs.html" . }}
   </div>
+  {{ .Content }}
+  {{- with (sort .Pages "LinkTitle" "asc") }}
+    <div class="flex flex-wrap gap-4 w-full">
+      {{ range . }}
+      <a href="{{ .RelPermalink }}">
+        <button class="btn btn-outline btn-sm btn-accent">{{ .LinkTitle }}</button>
+      </a>
+      {{ end }}
+    </div>
+  {{- end }}
+</div>
 {{ end }}

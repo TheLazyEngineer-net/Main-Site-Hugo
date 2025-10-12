@@ -1,0 +1,7 @@
+{{ $pages := . -}}
+
+<div class="flex flex-col w-full gap-4">
+  {{- range $pages }}
+    {{- partial "section/card.html" . }}
+  {{- end }}
+</div>

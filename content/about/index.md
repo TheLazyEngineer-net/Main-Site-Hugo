@@ -1,5 +1,9 @@
 +++
 title = 'About TheLazyEngineer'
+[menus]
+  [menus.main]
+    name = 'About'
+    weight = 100
 +++
 
 ### Site Purpose

@@ -1,0 +1,86 @@
+{{- $page := .page }}
+{{- $menuID := .menuID }}
+{{- $color := default "primary" .color }}
+{{- $size := default "md" .size }}
+
+{{- with index site.Menus $menuID }}
+  {{- range $i, $m := . }}
+    {{- $attrs := dict "href" .URL }}
+    {{- if $page.IsMenuCurrent .Menu . }}
+      {{- $attrs = merge $attrs (dict "class" "active" "aria-current" "page") }}
+    {{- else if $page.HasMenuCurrent .Menu .}}
+      {{- $attrs = merge $attrs (dict "class" "ancestor" "aria-current" "true") }}
+    {{- end }}
+
+    {{- $name := .Name }}
+    {{- with .Identifier }}
+      {{- with T . }}
+        {{- $name = . }}
+      {{- end }}
+    {{- end -}}
+
+    {{- with .Children }}
+      <div class="dropdown dropdown-start dropdown-hover">
+        <a
+          {{- range $k, $v := $attrs }}
+            {{- with $v }}
+              {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+            {{- end }}
+          {{- end -}}
+        >
+          <div
+            tabindex="{{ $i }}"
+            role="button"
+            class="btn btn-sm btn-soft btn-{{ $size }} btn-{{ $color }}"
+          >
+            <span class="text-base md:text-lg">{{ $name }}</span>
+          </div>
+        </a>
+        <ul tabindex="{{ $i }}" class="dropdown-content menu font-bold rounded-box z-1 min-w-24 p-2 bg-base-300 shadow-sm">
+          {{- range . }}
+            {{- $attrs := dict "href" .URL }}
+            {{- if $page.IsMenuCurrent .Menu . }}
+              {{- $attrs = merge $attrs (dict "class" "active" "aria-current" "page") }}
+            {{- else if $page.HasMenuCurrent .Menu .}}
+              {{- $attrs = merge $attrs (dict "class" "ancestor" "aria-current" "true") }}
+            {{- end }}
+
+            {{- $name := .Name }}
+            {{- with .Identifier }}
+              {{- with T . }}
+                {{- $name = . }}
+              {{- end }}
+            {{- end -}}
+
+            <li>
+              <a
+                {{- range $k, $v := $attrs }}
+                  {{- with $v }}
+                    {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+                  {{- end }}
+                {{- end -}}
+              >
+                {{ $name }}
+              </a>
+            </li>
+          {{- end }}
+        </ul>
+      </div>
+    {{- else }}
+      <a
+        {{- range $k, $v := $attrs }}
+          {{- with $v }}
+            {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+          {{- end }}
+        {{- end -}}
+      >
+        <div
+          role="button"
+          class="btn btn-sm btn-soft btn-{{ $size }} btn-{{ $color }}"
+        >
+          <span class="text-base md:text-lg">{{ $name }}</span>
+        </div>
+      </a>
+    {{- end }}
+  {{- end }}
+{{- end }}
