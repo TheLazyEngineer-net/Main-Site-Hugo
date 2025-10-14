@@ -1,1 +1,1 @@
-/nix/store/h8a9vfxlwh8vxbx5cvihgf46crz8f15y-daisyui.js
+/nix/store/d6w38bfk7n2gl6389jyfh3nxcp3czng1-source

@@ -1,13 +1,14 @@
 // Top level attributes (must be siblings):
-//   search-bar: element containing the search input
+//   search-button: button element to toggle search showModal
+//   search-button-modal: modal to show/hide with search-button - expected to be sibling of button
 //   search-results: ul element with a template for displaying search results
 //   search-pagination: element containing the pagination templates
 (async function () {
-  const RESULT_EXCERPT_QUERY = "p[search-result-excerpt]";
-  const RESULT_IMAGE_QUERY = "img[search-result-image]";
   const pagefind = await import("/pagefind/pagefind.js");
   const searchBars = document.querySelectorAll("[search-bar]");
+  const searchButtons = document.querySelectorAll("[search-button]");
 
+  // throws a useful message when exactly one element is not returned
   const getSingleElement = function (el, query) {
     const rets = el.querySelectorAll(query);
     const length = rets.length;
@@ -19,51 +20,63 @@
     return rets[0];
   };
 
-  searchBars.forEach(async (searchBar) => {
-    const searchInput = getSingleElement(searchBar, 'input[type="search"]');
-    const searchResults = getSingleElement(searchBar.parentElement, "ul[search-results]");
-    const searchPagination = getSingleElement(searchBar.parentElement, "[search-pagination]");
+  searchBars.forEach(async (bar) => {
+    const input = getSingleElement(bar, 'input[type="search"]');
+    const results = getSingleElement(bar.parentElement, "ul[search-results]");
+    const pgn = getSingleElement(bar.parentElement, "[search-pagination]");
 
-    // Handle if the search input already has a value
-    if (searchInput.value) {
-      await pagefind.init();
-      const search = await pagefind.search(searchInput.value);
-      await showResults(search, searchResults, searchPagination, 1);
-    } else {
-      // Pagefind can be initialized to speed things up.  It's only applicable
-      // if search is used and should be transparent to the user with a focus change.
-      // It also should happen only once.
-      searchInput.addEventListener("focus", async function func() {
-        searchInput.removeEventListener("focus", func);
-        await pagefind.init();
-      });
+    if (input.value) {
+      const search = await pagefind.search(input.value);
+      await showResults(search, results, pgn, 1);
     }
 
-    searchInput.addEventListener("change", async (e) => {
+    input.addEventListener("change", async (e) => {
       const search = await pagefind.search(e.target.value);
-      await showResults(search, searchResults, searchPagination, 1);
+      await showResults(search, results, pgn, 1);
     });
 
-    searchInput.addEventListener("input", async (e) => {
+    input.addEventListener("input", async (e) => {
       const search = await pagefind.debouncedSearch(e.target.value);
-      await showResults(search, searchResults, searchPagination, 1);
+      await showResults(search, results, pgn, 1);
     });
   });
 
-  const showResults = async function (search, resultsList, pagination, pageNum) {
+  searchButtons.forEach(async (b) => {
+    const modal = getSingleElement(b.parentElement, "[search-button-modal]");
+
+    b.addEventListener("click", () => modal.showModal());
+
+    modal.addEventListener("toggle", async (e) => {
+      if (e.newState === "open") {
+        searchInput.focus();
+      }
+    });
+  });
+
+  const showResults = async function (
+    search,
+    resultsList,
+    pagination,
+    pageNum,
+  ) {
     if (search === null) {
       console.debug("null search");
       return;
     }
 
     const count = getIntAttribute(resultsList, "search-results-count") ?? 5;
-    const resultsTemplate = getSingleElement(resultsList, "template[search-result]");
+    const resultsTemplate = getSingleElement(
+      resultsList,
+      "template[search-result]",
+    );
 
     // if something happens later, we want to retain the template
     resultsList.replaceChildren(resultsTemplate);
 
     const index = Math.max((pageNum - 1) * count, 0);
-    const results = await Promise.all(search.results.slice(index, index + count).map((r) => r.data()));
+    const results = await Promise.all(
+      search.results.slice(index, index + count).map((r) => r.data()),
+    );
 
     results
       .map((e) => toHtml(e, resultsTemplate))
@@ -76,6 +89,8 @@
   };
 
   const toHtml = function (result, resultsTemplate) {
+    const RESULT_EXCERPT_QUERY = "p[search-result-excerpt]";
+    const RESULT_IMAGE_QUERY = "img[search-result-image]";
     let res = resultsTemplate.content.cloneNode(true);
 
     if (result.url) {
@@ -114,62 +129,68 @@
   };
 
   const showPagination = function (pageNum, pageCount, pagination, showPage) {
-    const prevTemplate = getSingleElement(
+    const template = getSingleElement(
       pagination,
-      "template[search-pagination-prev]",
-    );
-    const itemTemplate = getSingleElement(
-      pagination,
-      "template[search-pagination-text]",
-    );
-    const nextTemplate = getSingleElement(
-      pagination,
-      "template[search-pagination-next]",
+      "template[search-pagination-button]",
     );
 
-    pagination.replaceChildren(prevTemplate, itemTemplate, nextTemplate);
-    
+    pagination.replaceChildren(template);
+
     if (pageCount < 2) {
       return;
     }
 
-    if (pageNum !== 1) {
-      const onclick = () => showPage(pageNum - 1);
-      createPaginationElement(prevTemplate, "", onclick, pagination);
+    if (pageNum > 2) {
+      createPaginationElement(template, "<<", () => showPage(1), pagination);
     }
 
-    if (pageNum >= 1) {
-      const onclick = () => showPage(1);
-      createPaginationElement(itemTemplate, "1", onclick, pagination);
+    if (pageNum > 1) {
+      createPaginationElement(
+        template,
+        "<",
+        () => showPage(pageNum - 1),
+        pagination,
+      );
     }
 
-    if (pageNum > 3) {
-      createPaginationElement(itemTemplate, "...", null, pagination);
-    }
-
-    let i = Math.max(pageNum - 1, 2);
-    while (i < Math.min(pageNum + 2, pageCount)) {
-      const pageNum = i;
-      createPaginationElement(itemTemplate, pageNum, () => showPage(pageNum),  pagination);
-      ++i;
-    }
-
-    if (pageNum < pageCount - 2) {
-      createPaginationElement(itemTemplate, "...", null, pagination);
-    }
-
-    if (pageNum <= pageCount) {
-      const onclick = () => showPage(pageCount);
-      createPaginationElement(itemTemplate, pageCount, onclick, pagination);
+    const minPageNum = Math.max(1, pageNum - 2);
+    const maxPageNum = Math.min(pageCount, pageNum + 2);
+    for (let i = minPageNum; i <= maxPageNum; ++i) {
+      createPaginationElement(
+        template,
+        i.toString(),
+        () => showPage(i),
+        pagination,
+        i === pageNum,
+      );
     }
 
     if (pageNum < pageCount) {
-      const onclick = () => showPage(pageNum + 1);
-      createPaginationElement(nextTemplate, null, onclick, pagination);
+      createPaginationElement(
+        template,
+        ">",
+        () => showPage(pageNum + 1),
+        pagination,
+      );
+    }
+
+    if (pageNum < pageCount - 1) {
+      createPaginationElement(
+        template,
+        ">>",
+        () => showPage(pageCount),
+        pagination,
+      );
     }
   };
 
-  const createPaginationElement = function (template, value, onclick, parent) {
+  const createPaginationElement = function (
+    template,
+    value,
+    onclick,
+    parent,
+    disabled = false,
+  ) {
     let el = template.content.firstElementChild;
 
     if (!el || !el.isEqualNode(template.content.lastElementChild)) {
@@ -179,6 +200,10 @@
     }
 
     el = el.cloneNode(true);
+
+    if (disabled) {
+      el.setAttribute("disabled", "");
+    }
 
     if (value) {
       el.innerHTML = value;

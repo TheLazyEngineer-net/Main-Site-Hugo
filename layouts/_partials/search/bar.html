@@ -1,9 +1,16 @@
+{{- $autofocus := default false .autofocus }}
+
 {{- with resources.Get "svg/magnifying-glass.svg" }}
-  <label class="input w-full max-w-2xl px-2">
+  <label search-bar class="input w-full max-w-2xl px-2">
     <div class="flex-none h-full opacity-50 py-1">
       {{- .Content | safe.HTML }}
     </div>
-    <input search-bar type="search" class="grow" placeholder="Search">
+    <input
+      type="search"
+      class="grow"
+      placeholder="Search"
+      {{ if $autofocus }}autofocus{{ end }}
+    >
     <kbd class="kbd font-mono font-bold opacity-60">
       <span class="me-1">Cmd</span>K
     </kbd>

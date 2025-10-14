@@ -24,7 +24,7 @@ Humans are lazy by nature, and that impulse keeps us moving forward so that we c
 
 ### Background
 
-I am a programmer, so that is my primary domain of knowledge at this point.  I have always been paid to do backend work using languages like C++, C#, or Java.  In my free time, I spent time with newer languages that peaked my fancy, like Elixir, Go, and Rust.  Beyond programming, I also know quite a bit about systems administration and computer hardware.  More recently, I become interested in electronics, microcontrollers, and circuit design.
+I am a programmer by trade who dabbles in other, tangential domains.  I have always been paid to do backend work using languages like C++, C#, or Java.  In my free time, I spent time with newer languages that peaked my fancy, like Elixir, Go, and Rust.  Beyond programming, I also know quite a bit about systems administration and computer hardware.  More recently, I become interested in electronics, microcontrollers, and circuit design.
 
 When it comes to the web realm of programming, I am a luddite.  I have never been paid a salary to touch Javascript (in fact I made it clear a few times that I would prefer not to touch it).  The most time that I've spent in this space is making JSON HTTP APIs for the front-end because they needed some data presented in a different way.  I don't know what most HTML elements are or what they should be used for.  Javascript seems like an inside joke for programmers that went awry.  Getting something positioned where I want on a site can be a twenty minute excursion into the finer points of flexboxes, making me question at least three times whether I should have use grids.
 

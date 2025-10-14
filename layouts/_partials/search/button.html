@@ -1,5 +1,5 @@
 {{- with resources.Get "svg/magnifying-glass.svg" }}
-  <button search-modal-button class="btn btn-sm btn-soft btn-primary px-3">
+  <button search-button class="btn btn-sm btn-soft btn-primary px-3">
     <div class="w-5 h-5">
       {{- .Content | safe.HTML }}
     </div>
@@ -7,17 +7,40 @@
       <span class="me-1">Cmd</span>K
     </kbd>
   </button>
-  <dialog id="my_modal_1" class="modal">
-    <div class="modal-box">
-      <h3 class="text-lg font-bold">Hello!</h3>
-      {{- partial "search/bar.html" }}
-      <p class="py-4">Press ESC key or click the button below to close</p>
-      <div class="modal-action">
-        <form method="dialog">
-          <!-- if there is a button in form, it will close the modal -->
-          <button class="btn">Close</button>
-        </form>
+  <dialog search-button-modal class="modal items-start">
+    <div class="modal-box w-full max-w-2xl mt-16">
+      <h3 class="text-lg font-bold py-4">Search Site</h3>
+      {{- partial "search/bar.html" (dict "autofocus" true) }}
+      <ul search-results search-results-count="5" class="list-none mt-4 max-w-2xl ml-0 mb-0">
+        <template search-result>
+          <li>
+            <a search-result-link class="text-text">
+              <div class="grid grid-rows-[fit-content(2rem)_fit-content(6rem)] grid-flow-col p-2 rounded-lg">
+                <h3 search-result-title class=""></h3>
+                <div class="flex flex-nowrap items-center gap-2">
+                  <img search-result-image class="h-20 object-scale-down ml-0">
+                  <p search-result-excerpt class="text-current text-sm font-normal m-0"></p>
+                </div>
+              </div>
+            </a>
+          </li>
+        </template>
+      </ul>
+      <div search-pagination class="flex gap-4">
+        <template search-pagination-prev>
+          <button type="button">PREV</button>
+        </template>
+        <template search-pagination-next>
+          <button type="button">NEXT</button>
+        </template>
+        <template search-pagination-text>
+          <button type="button"></button>
+        </template>
       </div>
+      <p class="py-4">Press ESC key or click the button below to close</p>
     </div>
+    <form method="dialog" class="modal-backdrop">
+      <button>close</button>
+    </form>
   </dialog>
 {{- end }}

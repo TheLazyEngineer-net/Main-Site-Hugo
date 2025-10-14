@@ -1,66 +1,42 @@
-{{- $msg1 := "When passing a map to the internal pagination template, one of the elements must be named 'page', and it must be set to the context of the current page." }}
-{{- $page := . }}
 {{- $slots := 5 }}
 
-{{- if reflect.IsMap . }}
-  {{- with .page }}
-    {{- $page = . }}
-  {{- else }}
-    {{- errorf $msg1 }}
-  {{- end }}
-{{- end }}
-
-{{- if gt $page.Paginator.TotalPages 1 }}
-<div class="join gap-2">
-  {{- with .Paginator }}
-    {{- $currentPageNumber := .PageNumber }}
-    {{- $start := math.Max 1 (sub .PageNumber (math.Floor (div $slots 2))) }}
-    {{- $end := math.Min .TotalPages (sub (add $start $slots) 1) }}
-    {{- if lt (add (sub $end $start) 1) $slots }}
-      {{- $start = math.Max 1 (add (sub $end $slots) 1) }}
-    {{- end }}
-
-    {{- if and (gt .TotalPages $slots) (gt $start 1) }}
-      {{- with .First }}
-      <a href="{{ .URL }}" aria-label="First" class="join-item" role="button">
-        <button class="btn btn-xs btn-secondary">1</button>
-      </a>
+{{- if gt .Paginator.TotalPages 1 }}
+  <div class="join gap-2">
+    {{- with .Paginator }}
+      {{- $currentPageNumber := .PageNumber }}
+      {{- $start := math.Max 1 (sub .PageNumber (math.Floor (div $slots 2))) }}
+      {{- $end := math.Min .TotalPages (sub (add $start $slots) 1) }}
+      {{- if lt (add (sub $end $start) 1) $slots }}
+        {{- $start = math.Max 1 (add (sub $end $slots) 1) }}
       {{- end }}
-    {{- end }}
 
-    {{- with .Prev }}
-      <a href="{{ .URL }}" aria-label="Previous" class="join-item" role="button">
-        <button class="btn btn-xs btn-secondary"><</button>
-      </a>
-    {{- end }}
-
-    {{- range $k := seq $start $end }}
-      {{- if eq $.Paginator.PageNumber $k }}
-      <a aria-current="page" aria-label="Page {{ $k }}" class="join-item" role="button">
-        <button class="btn btn-xs btn-secondary btn-disabled">{{ $k }}</button>
-      </a>
-      {{- else }}
-      <a href="{{ (index $.Paginator.Pagers (sub $k 1)).URL }}" aria-label="Page {{ $k }}" class="join-item" role="button">
-        <button class="btn btn-xs btn-secondary">{{ $k }}</button>
-      </a>
+      {{- if and (gt .TotalPages $slots) (gt $start 1) }}
+        {{- with .First }}
+          {{- partial "pagination/first.html" .URL }}
+        {{- end }}
       {{- end }}
-    {{- end }}
 
-    {{- with .Next }}
-      <a href="{{ .URL }}" aria-label="Next" class="join-item" role="button">
-        <button class="btn btn-xs btn-secondary">></button>
-      </a>
-    {{- end }}
+      {{- with .Prev }}
+        {{- partial "pagination/prev.html" .URL }}
+      {{- end }}
 
-    {{- if and (gt .TotalPages $slots) (gt $end $currentPageNumber) }}
-      {{- with .Last }}
-        {{- if ne $currentPageNumber .PageNumber }}
-        <a href="{{ .URL }}" aria-label="Last" class="join-item btn btn-xs" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+      {{- range $k := seq $start $end }}
+        {{- if eq $.Paginator.PageNumber $k }}
+          {{- partial "pagination/num.html" (dict "num" $k "disabled" true) }}
         {{- else }}
-        <a aria-disabled="true" aria-label="Last" class="join-item btn btn-xs" role="button" tabindex="-1"><span aria-hidden="true">&raquo;&raquo;</span></a>
+          {{- partial "pagination/num.html" (dict "num" $k "url" (index $.Paginator.Pagers (sub $k 1)).URL) }}
+        {{- end }}
+      {{- end }}
+
+      {{- with .Next }}
+        {{- partial "pagination/next.html" .URL }}
+      {{- end }}
+
+      {{- if and (gt .TotalPages $slots) (gt $end $currentPageNumber) }}
+        {{- with .Last }}
+          {{- partial "pagination/last.html" (dict "num" .PageNumber "url" .URL) }}
         {{- end }}
       {{- end }}
     {{- end }}
-  {{- end }}
-</div>
+  </div>
 {{- end }}

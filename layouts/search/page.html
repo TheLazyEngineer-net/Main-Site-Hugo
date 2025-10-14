@@ -2,7 +2,7 @@
   <div data-pagefind-ignore="all" class="flex flex-col items-center gap-8 w-full max-w-4xl bg-base-200 p-8 rounded-2xl">
     {{- partial "title.html" . }}
     {{- partial "search/bar.html" }}
-    <ul search-results search-results-count="1" class="list-none mt-4 max-w-2xl ml-0 mb-0">
+    <ul search-results search-results-count="10" class="list-none mt-4 max-w-2xl ml-0 mb-0">
       <template search-result>
         <li>
           <a search-result-link class="text-text">
@@ -17,15 +17,9 @@
         </li>
       </template>
     </ul>
-    <div search-pagination class="flex gap-4">
-      <template search-pagination-prev>
-        <button type="button">PREV</button>
-      </template>
-      <template search-pagination-next>
-        <button type="button">NEXT</button>
-      </template>
-      <template search-pagination-text>
-        <button type="button"></button>
+    <div search-pagination class="flex gap-2">
+      <template search-pagination-button>
+        <button class="btn btn-sm btn-secondary" type="button"></button>
       </template>
     </div>
   </div>

@@ -1,0 +1,13 @@
+{{ $num := .num -}}
+{{ $disabled := default false .disabled -}}
+
+{{- if $disabled }}
+  <a aria-current="page" aria-label="Page {{ $num }}" class="join-item" role="button">
+    <button class="btn btn-xs btn-secondary btn-disabled">{{ $num }}</button>
+  </a>
+{{- else }}
+  {{ $url := .url -}}
+  <a href="{{ $url }}" aria-label="Page {{ $num }}" class="join-item" role="button">
+    <button class="btn btn-xs btn-secondary">{{ $num }}</button>
+  </a>
+{{- end }}
