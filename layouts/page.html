@@ -1,36 +1,49 @@
-{{ define "head" }}
-  {{ with .GetTerms "authors" }}
-    {{ range . }}
-    <meta name="author" content="{{ .LinkTitle }}">
-    {{ end }}
-  {{ end }}
-{{ end }}
+{{- define "head" }}
+  {{- with .GetTerms "authors" }}
+    {{- range . }}
+      <meta name="author" content="{{ .LinkTitle }}">
+    {{- end }}
+  {{- end }}
+  {{- with .Params.tags }}
+    <meta name="keywords" content="{{ delimit . ", " }}">
+  {{- end }}
+  {{- with .Params.featuredImage }}
+    {{- with resources.Get . }}
+      <meta data-pagefind-meta="image[content]" name="featuredimage" content="{{ .RelPermalink  }}">
+    {{- end }}
+  {{- end }}
+{{- end }}
 
-{{ define "main" }}
-<div class="flex flex-col items-center gap-8 w-full max-w-4xl bg-base-200 p-4 md:p-8 rounded-2xl">
-  <div class="flex flex-col gap-2 p-8">
-    <h1 class="self-start text-4xl text-secondary font-bold">{{ .Title }}</h1>
+{{- define "main" }}
+  <div data-pagefind-filter="section:posts"
+       class="flex flex-col items-center gap-8 w-full max-w-4xl bg-base-200 p-8 md:px-16 rounded-2xl">
+    <div class="flex flex-col gap-2 p-8">
+      <h1 data-pagefind-meta="title"
+          class="self-start text-4xl text-secondary font-bold">
+        {{ .Title }}
+      </h1>
+      <time data-pagefind-meta="date[datetime]"
+            datetime="{{ .Date | time.Format "2001-02-03" }}"
+            class="self-end opacity-70 italic">
+        {{ .Date | time.Format ":date_long" }}
+      </time>
+    </div>
 
-    {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-    {{ $dateHuman := .Date | time.Format ":date_long" }}
-    <time datetime="{{ $dateMachine }}" class="self-end opacity-70 italic">{{ $dateHuman }}</time>
+    {{- with .Params.quote }}
+      <div data-pagefind-ignore="all" class="prose md:prose-lg">
+        <blockquote>
+          <p>{{ .text }}</p>
+          <footer class="text-right">-<cite>{{ .author }}</cite></footer>
+        </blockquote>
+      </div>
+    {{- end }}
+
+    <article class="prose md:prose-lg max-w-full">
+      {{ .ContentWithoutSummary }}
+    </article>
+
+    <div data-pagefind-ignore="all">
+      {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+    </div>
   </div>
-
-  {{ with .Params.quote }}
-  <div data-pagefind-ignore="all" class="prose md:prose-lg">
-    <blockquote>
-      <p>{{ .text }}</p>
-      <footer class="text-right">-<cite>{{ .author }}</cite></footer>
-    </blockquote>
-  </div>
-  {{ end }}
-
-  <article class="prose md:prose-lg max-w-full">
-    {{ .ContentWithoutSummary }}
-  </article>
-
-  <div data-pagefind-ignore="all">
-    {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
-  </div>
-</div>
-{{ end }}
+{{- end }}

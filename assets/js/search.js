@@ -5,8 +5,8 @@
 //   search-pagination: element containing the pagination templates
 (async function () {
   const pagefind = await import("/pagefind/pagefind.js");
-  const searchBars = document.querySelectorAll("[search-bar]");
-  const searchButtons = document.querySelectorAll("[search-button]");
+  const bars = document.querySelectorAll("[search-bar]");
+  const buttons = document.querySelectorAll("[search-button]");
 
   // throws a useful message when exactly one element is not returned
   const getSingleElement = function (el, query) {
@@ -20,28 +20,90 @@
     return rets[0];
   };
 
-  searchBars.forEach(async (bar) => {
+  const isElementVisible = function (e) {
+    const modalParent = e.closest(".modal");
+    if (modalParent) {
+      return modalParent.hasAttribute("open");
+    }
+
+    const isHidden = e.style.display === "none" || e.offsetWidth === 0;
+    const modals = document.querySelectorAll(".modal");
+    const isModalOpen = Array.from(modals).every((m) => {
+      m.hasAttribute("open");
+    });
+
+    return !isHidden && !isModalOpen;
+  };
+
+  document.addEventListener("keydown", (e) => {
+    if (e.metaKey && e.key === "k") {
+      const visBars = Array.from(bars).filter((b) => isElementVisible(b));
+      if (visBars.length > 0) {
+        let b = getSingleElement(visBars[0], 'input[type="search"]');
+        b.focus();
+        b.value = b.value;
+        return;
+      }
+
+      const visButtons = Array.from(buttons).filter((b) => isElementVisible(b));
+      if (visButtons.length > 0) {
+        visButtons[0].click();
+      }
+    }
+  });
+
+  bars.forEach(async (bar) => {
     const input = getSingleElement(bar, 'input[type="search"]');
+    const select = getSingleElement(bar, "select");
     const results = getSingleElement(bar.parentElement, "ul[search-results]");
     const pgn = getSingleElement(bar.parentElement, "[search-pagination]");
 
+    const getFilters = function (filter) {
+      let filters = {};
+
+      if (filter !== "all") {
+        filters = { filters: { section: select.value } };
+      }
+
+      return filters;
+    };
+
+    let filters = {};
+    if (select.value !== "all") {
+      filters = { filters: { section: select.value } };
+    }
+
     if (input.value) {
-      const search = await pagefind.search(input.value);
+      const search = await pagefind.search(input.value, filters);
       await showResults(search, results, pgn, 1);
     }
 
     input.addEventListener("change", async (e) => {
-      const search = await pagefind.search(e.target.value);
+      const search = await pagefind.search(
+        e.target.value,
+        getFilters(select.value),
+      );
       await showResults(search, results, pgn, 1);
     });
 
     input.addEventListener("input", async (e) => {
-      const search = await pagefind.debouncedSearch(e.target.value);
+      const search = await pagefind.debouncedSearch(
+        e.target.value,
+        getFilters(select.value),
+      );
+      await showResults(search, results, pgn, 1);
+    });
+
+    select.addEventListener("change", async (e) => {
+      const search = await pagefind.search(
+        input.value,
+        getFilters(e.target.value),
+      );
       await showResults(search, results, pgn, 1);
     });
   });
 
-  searchButtons.forEach(async (b) => {
+  buttons.forEach(async (b) => {
     const modal = getSingleElement(b.parentElement, "[search-button-modal]");
 
     b.addEventListener("click", () => modal.showModal());
@@ -89,8 +151,28 @@
   };
 
   const toHtml = function (result, resultsTemplate) {
-    const RESULT_EXCERPT_QUERY = "p[search-result-excerpt]";
-    const RESULT_IMAGE_QUERY = "img[search-result-image]";
+    // The minor bit of trickery here is that at the top of the stack this will
+    // be called with a DocumentFragment as the Node, so we don't have to worry
+    // about checking the query against the Node itself since it won't have attributes.
+    // If this changes, this function will need to be revised with a wrapper.
+    const filterOutElements = function (query, node) {
+      if (node.childElementCount === 0) {
+        return;
+      }
+
+      let matches = [];
+      for (let child of node.children) {
+        if (child.matches(query)) {
+          matches.push(child);
+          continue;
+        }
+
+        filterOutElements(query, child);
+      }
+
+      matches.forEach((e) => e.remove());
+    };
+
     let res = resultsTemplate.content.cloneNode(true);
 
     if (result.url) {
@@ -98,7 +180,7 @@
         .querySelectorAll("a[search-result-link]")
         .forEach((e) => (e.href = result.url));
     } else {
-      // can't think of a way to recover from this
+      // the URL is required, this code path should not happen
       throw new Error("missing URL in the search result");
     }
 
@@ -107,6 +189,7 @@
       .querySelectorAll("[search-result-title]")
       .forEach((e) => (e.innerHTML = title));
 
+    const RESULT_EXCERPT_QUERY = "p[search-result-excerpt]";
     if (result.excerpt) {
       res
         .querySelectorAll(RESULT_EXCERPT_QUERY)
@@ -116,6 +199,7 @@
       filterOutElements(RESULT_EXCERPT_QUERY, res);
     }
 
+    const RESULT_IMAGE_QUERY = "img[search-result-image]";
     if (result.meta.image) {
       res
         .querySelectorAll(RESULT_IMAGE_QUERY)
@@ -123,6 +207,20 @@
     } else {
       console.debug("search result doesn't contain image");
       filterOutElements(RESULT_IMAGE_QUERY, res);
+    }
+
+    const RESULT_DATE_QUERY = "img[search-result-date]";
+    if (result.meta.date) {
+      const date = new Date(result.meta.date);
+      const datetime = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+
+      res.querySelectorAll(RESULT_DATE_QUERY).forEach((e) => {
+        e.setAttribute("datetime", datetime);
+        e.innerHTML = result.meta.date;
+      });
+    } else {
+      console.debug("search result doesn't contain date");
+      filterOutElements(RESULT_DATE_QUERY, res);
     }
 
     return res;
@@ -218,27 +316,5 @@
 
   const getIntAttribute = function (el, attr) {
     return isNaN((value = el.getAttribute(attr))) ? null : parseInt(value);
-  };
-
-  // The minor bit of trickery here is that at the top of the stack this will
-  // be called with a DocumentFragment as the Node, so we don't have to worry
-  // about checking the query against the Node itself since it won't have attributes.
-  // If this changes, this function will need to be revised with a wrapper.
-  const filterOutElements = function (query, node) {
-    if (node.childElementCount === 0) {
-      return;
-    }
-
-    let matches = [];
-    for (let child of node.children) {
-      if (child.matches(query)) {
-        matches.push(child);
-        continue;
-      }
-
-      filterOutElements(query, child);
-    }
-
-    matches.forEach((e) => e.remove());
   };
 })();

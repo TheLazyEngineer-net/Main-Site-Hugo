@@ -2,19 +2,9 @@
   <div data-pagefind-ignore="all" class="flex flex-col items-center gap-8 w-full max-w-4xl bg-base-200 p-8 rounded-2xl">
     {{- partial "title.html" . }}
     {{- partial "search/bar.html" }}
-    <ul search-results search-results-count="10" class="list-none mt-4 max-w-2xl ml-0 mb-0">
+    <ul search-results search-results-count="10" class="list gap-2 w-full">
       <template search-result>
-        <li>
-          <a search-result-link class="text-text">
-            <div class="grid grid-rows-[fit-content(2rem)_fit-content(6rem)] grid-flow-col p-2 rounded-lg">
-              <h3 search-result-title class=""></h3>
-              <div class="flex flex-nowrap items-center gap-2">
-                <img search-result-image class="h-20 object-scale-down ml-0">
-                <p search-result-excerpt class="text-current text-sm font-normal m-0"></p>
-              </div>
-            </div>
-          </a>
-        </li>
+        {{ partial "search/result.html" }}
       </template>
     </ul>
     <div search-pagination class="flex gap-2">

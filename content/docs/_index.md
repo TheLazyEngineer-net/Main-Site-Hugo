@@ -5,6 +5,9 @@ summary = 'Collection of hard-to-find technical documentation for useful things'
   [menus.main]
     name = 'Docs'
     weight = 20
+[cascade]
+  [cascade.params]
+    featuredImage = 'svg/docs.svg'
 +++
 
 ### Introduction

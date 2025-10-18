@@ -1,4 +1,4 @@
-<a class="flex flex-col p-4 rounded-xl bg-base-100 shadow-md" href="{{ .RelPermalink }}">
+<a class="flex flex-col p-4 rounded-xl bg-base-100 shadow-md border-base-100 border-1 hover:border-accent" href="{{ .RelPermalink }}">
   <div class="flex w-full gap-4">
     {{ with .Param "featuredImage" }}
       {{ with resources.Get . }}
@@ -6,15 +6,14 @@
         {{ if ne .MediaType.SubType "svg" }}
           {{ $image := .Process "fit 128x128" }}
         {{ end }}
-
-        <figure class="">
-          <img src="{{ $image.RelPermalink }}" class="h-24" />
+        <figure class="self-center p-2 bg-base-100 dark:bg-base-content rounded-lg">
+          <img src="{{ $image.RelPermalink }}" class="h-24 w-24" />
         </figure>
       {{ end }}
     {{ end }}
     <div class="flex-1 flex flex-col gap-2">
       <div class="flex flex-col gap-0">
-        <h2 class="text-xl  font-extrabold">{{ .Title }}</h2>
+        <h2 class="text-xl font-extrabold text-secondary">{{ .Title }}</h2>
         {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
         {{ $dateHuman := .Date | time.Format ":date_long" }}
         <time datetime="{{ $dateMachine }}" class="text-sm italic">{{ $dateHuman }}</time>
