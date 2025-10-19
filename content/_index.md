@@ -1,5 +1,6 @@
 +++
-title = 'TheLazyEngineer Homepage'
+title = 'TheLazyEngineer Home'
+linkTitle = 'Home'
 [params]
   subtitle = 'Collection of documentation and posts'
 [menus]

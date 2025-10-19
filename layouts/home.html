@@ -1,25 +1,27 @@
 {{- define "main" -}}
-<div data-pagefind-ignore="all" class="place-self-center flex flex-col items-center gap-8 w-full max-w-4xl bg-base-200 p-8 rounded-2xl">
+<div data-pagefind-ignore="all"
+     class="place-self-center flex flex-col items-center gap-4 w-full max-w-4xl bg-base-100 p-8 rounded-2xl">
   {{ partial "title.html" . -}}
 
   <div class="prose md:prose-lg">
     {{ .Content }}
   </div>
 
-  <ul class="menu menu-lg w-full bg-base-300 rounded-xl">
-    <li>
-      <h2 class="menu-title text-base-content text-3xl font-bold opacity-60">Documentation</h2>
-      <ul>
+  <div class="collapse collapse-arrow bg-base-200 rounded-2xl">
+    <input type="checkbox" checked />
+    <div class="collapse-title text-secondary text-3xl font-bold pl-8">Documentation</div>
+    <div class="collapse-content flex flex-col items-center gap-4">
+      <ul class="menu menu-lg w-full bg-base-100 rounded-xl">
         {{- with .GetPage "/docs" -}}
           {{ partial "sidebar/sections.html" . }}
         {{- end -}}
       </ul>
-    </li>
-  </ul>
+    </div>
+  </div>
 
-  <div class="collapse collapse-arrow bg-base-300">
+  <div class="collapse collapse-arrow bg-base-200 rounded-2xl">
     <input type="checkbox" checked />
-    <div class="collapse-title text-3xl font-bold pl-8 opacity-60">Recent Posts</div>
+    <div class="collapse-title text-secondary text-3xl font-bold pl-8">Recent Posts</div>
     <div class="collapse-content flex flex-col items-center gap-4">
       {{ with first 10 (where .Site.RegularPages "Section" "posts") -}}
         {{ partial "section/list-all.html" . -}}

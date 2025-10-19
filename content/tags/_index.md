@@ -1,5 +1,6 @@
 +++
 title = 'TheLazyEngineer Tags'
+linkTitle = 'Tags'
 [params]
   subtitle = 'Posts organized by tags'
 [menus]

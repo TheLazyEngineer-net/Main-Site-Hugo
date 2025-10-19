@@ -1,6 +1,6 @@
 <ol>
   {{- range .Ancestors.Reverse }}
-  <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+  <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
   {{- end }}
-  <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+  <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
 </ol>

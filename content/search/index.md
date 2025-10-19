@@ -1,4 +1,4 @@
 +++
-title = 'Search Site Resources'
-name = 'Search'
+title = 'Search Site'
+linkTitle = 'Search'
 +++

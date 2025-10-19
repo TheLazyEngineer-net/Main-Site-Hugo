@@ -1,5 +1,6 @@
 +++
 title = 'Technology Documentation'
+linkTitle = 'Docs'
 summary = 'Collection of hard-to-find technical documentation for useful things'
 [menus]
   [menus.main]
@@ -12,7 +13,7 @@ summary = 'Collection of hard-to-find technical documentation for useful things'
 
 ### Introduction
 
-This is a collection technical documentation for things that are poorly documented elsewhere.  This may take the form of link aggregation of other documentation, step-by-step instructions, and general explainations of technical concepts.
+This is a collection technical documentation for things that are poorly documented elsewhere.  This may take the form of link aggregation of other documentation, step-by-step instructions, and general explainations of technical concepts.  New sections will be added with time.
 
 ### Subsections
 

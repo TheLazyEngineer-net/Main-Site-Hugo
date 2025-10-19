@@ -1,5 +1,6 @@
 +++
 title = 'About TheLazyEngineer'
+linkTitle = 'About'
 description = "About TheLazyEngineer.net"
 [menus]
   [menus.main]
@@ -7,16 +8,16 @@ description = "About TheLazyEngineer.net"
     weight = 100
 +++
 
-Robust systems are becoming increasingly hard to find.  We seem to be happy with technology that lasts no more than five years.  It wasn't long ago that we had to replace our computers and phones ever two years to be able to use the newest software.  Software breaks countless things with every major release, causing countless manhours of additional work.  The constant churn of new technology is endless and it grows tiresome.
+Robust systems are becoming increasingly hard to find with new technology.  We seem to be happy with technology that will only last five years.  It wasn't long ago that we had to replace our computers and phones every two years to be able to use the newest software.  Software breaks countless things with every major release, causing untold manhours of additional work.  The constant churn of new technology is endless and it grows tiresome.
 
-Human beings are amazing at creating tools that last the test of time.  Axes and hatchets have been cutting things for millenia, wheels are still round and exceptionally useful, and the venerable stick has been a lever for all of recorded history.  What do these tools have in common?  Simplicity in function and form.
+Human beings are amazing at creating tools that last the test of time.  Axes and hatchets have been cutting wood (and unfortunately people) for millenia, wheels are still round and exceptionally useful, and the venerable stick has been moving things as a lever for all of recorded history.  What do these tools have in common?  Simplicity in function and form.
 
-Simplicity is foundational to robustness and robust things are nicer to use.  Who wants to spend half a day fixing something that was working fine last week but then had a software update?  Let's bring back robustness to our technology.  The information on this site is directed to this purpose.
+Simplicity is foundational to robustness and robust things are just nicer to use.  Who wants to spend half a day fixing something that was working fine last week but then had a software update?  Let's bring back robustness to our technology.  The information on this site is directed to this purpose.
 
 ### Site Purpose
 
 1. To organize areas of scattered and neglected technical information -- [Docs](/docs)
-2. A place to write about my technical opinions -- [Posts](/posts)
+2. A place for my opinionated, technical thoughts -- [Posts](/posts)
 3. An excuse to learn to build a website from the ground up
 
 ### Audience
@@ -35,14 +36,14 @@ Humans are lazy by nature, and that trait keeps us moving forward in our exponen
 
 ### Background
 
-I am a Software Engineer.  I have been doing that for nearing two decades at this point.  I have always been paid to do text-based, backend work, so that is my main area of programming knowledge.  I have also built computers and servers for as long as I have been programming and have taken up Linux systems administration as a hobby.  More recently, I have spent some time learning more about electronics, circuit design, and power systems.
+I am a Software Engineer.  I have been doing that kind of work for nearing two decades at this point.  I have always been paid to do text-based, backend work, so that is my main area of programming expertise.  I have also built computers and servers for as long as I have been programming and have taken up Linux systems administration as a hobby.  More recently, I have spent some time learning more about electronics, circuit design, and power systems.
 
-My background and hobbies mean that I know a lot about computers.  However, computing is such a large field that there will always be more for me to learn.  That is why I love it.  There will always be people who know a lot more than me about any topic and have kernels of amazing knowlege.  If I get bored writing Java code, I can move on to Nix systems administration for a while.  There is always a new, relevant topic to learn more about.
+My background and hobbies mean that I know a lot about computers.  However, computing is such a large field that there will always be more for me to learn.  That is why I love it.  There will always be people who know a lot more than me about any topic and have kernels of amazing knowledge to share.  If I get bored writing Java code, I can move on to Nix systems administration for a while.  There is always a new, relevant topic for me to learn more about.
 
-I learned that I am a computer nerd later than many.  I learned to program for the first time in college.  Before that, I thought that I should be a musician, but I hated practicing as much as was needed.  It was too idle for my brain, too claustraphobic in the university's practice rooms, and I knew that hours of daily practice were required to move to the next level.  Luckily, while coming to this realization, I saw a friend working on his Computer Science homework in C++.  It looked interesting and I started asking him more about it.  I signed up for the introductory course the next semester and have been hooked ever since.
+I learned that I am a computer nerd later than many.  I started programming for the first time in college.  Before that, I thought that I should be a musician, but I hated practicing as much as was needed.  It was too idle for my brain, too claustraphobic in the university's practice rooms, and I knew that hours of daily practice were required to move to the next level.  Luckily, while coming to this realization, I saw a friend working on his Computer Science homework in C++.  It looked interesting and I started asking him more about it.  I signed up for the introductory course the next semester and have been hooked ever since.
 
 ### Privacy
 
-Privacy will always be respected on this site.  Currently, no site analytics have been added.  If site-analytics are added, then the details will be laid out here.
+Privacy will always be respected on this site.  Currently, no site analytics have been added.  If site-analytics are added, then the details will be laid out here.  They won't do anything scary.
 
 #### *Thank you for visiting my website.  I hope that you find something useful.*
