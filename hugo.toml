@@ -18,6 +18,7 @@ since = '2025'
         block = true
   [markup.highlight]
     noClasses = false
+    guessSyntax = false
 
 [build]
   [build.buildStats]

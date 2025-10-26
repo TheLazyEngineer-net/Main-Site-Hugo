@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-@source "hugo_stats.json";
 @plugin "./assets/js/lib/daisyui.js" {
   themes: false;
 }
@@ -13,7 +12,7 @@
   --color-base-200: oklch(23% 0.01 70);
   --color-base-300: oklch(19% 0.01 70);
   --color-base-content: oklch(95% 0.01 70);
-  --color-neutral: oklch(8% 0.01 70);
+  --color-neutral: oklch(14% 0.01 70);
   --color-neutral-content: var(--color-base-content);
   --color-primary: oklch(65% 0.18 58);
   --color-primary-content: var(--color-neutral);
@@ -43,11 +42,11 @@
   default: true;
   prefersdark: false;
   color-scheme: "light";
-  --color-base-100: oklch(90% 0.01 70);
-  --color-base-200: oklch(87% 0.01 70);
-  --color-base-300: oklch(83% 0.01 70);
+  --color-base-100: oklch(93% 0.01 70);
+  --color-base-200: oklch(90% 0.01 70);
+  --color-base-300: oklch(87% 0.01 70);
   --color-base-content: oklch(5% 0.01 70);
-  --color-neutral: oklch(78% 0.01 70);
+  --color-neutral: oklch(82% 0.01 70);
   --color-neutral-content: var(--color-base-content);
   --color-primary: oklch(62% 0.18 58);
   --color-primary-content: var(--color-base-100);
@@ -73,19 +72,16 @@
   --noise: 0;
 }
 
+@source "hugo_stats.json";
+
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 @custom-variant current (&:where(.current, .current *));
 
-@font-face {
-  font-family: Inter;
-  font-style: normal;
-  font-weight: 200 800;
-  font-display: swap;
-  src: url("/fonts/inter/InterVariable.woff2") format ("woff2");
-}
+@import "fonts.css";
 
 @theme {
   --font-primary: Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Iosevka Custom Web", ui-monospace, monospace;
 }
 
 @layer base {
@@ -109,7 +105,8 @@
   pre.chroma {
     width: fit-content;
     min-width: 100%;
-    padding: calc(var(--spacing) * 2);
-    border-radius: var(--radius-lg);
+    padding: calc(var(--spacing) * 4);
+    margin: 0;
+    border-radius: var(--radius-xl);
   }
 }

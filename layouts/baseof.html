@@ -12,9 +12,10 @@
       {{ block "main" . }}{{ end -}}
     </main>
 
-    {{ partial "footer.html" . -}}
+    {{ partialCached "footer.html" . -}}
 
-    {{ partial "js/theme.html" . -}}
-    {{ partial "js/search.html" . -}}
+    {{ partialCached "js/theme.html" . -}}
+    {{ partialCached "js/search.html" . -}}
+    {{ partialCached "js/codeblock.html" . -}}
   </body>
 </html>

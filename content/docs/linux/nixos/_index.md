@@ -5,12 +5,11 @@ linkTitle = 'Nixos'
 
 ### Introduction
 
-NixOS is simply a Linux distribution based around the Nix package manager.  It is a configuration file based OS.  Users, system services, application...everything is configured in these files.  This means that NixOS is an OS with a reproducible initial state.  With these configuration files, the same operating system can be replicated on any number of other machines.
+NixOS is a Linux distribution based around the Nix package manager.  The majority of the operating system is configured through files.  Users, system services, application...nearly everything is configured in these files.  The packages downloaded because of this configurationa are versioned each time the system is rebuilt, so you can rollback to any previous version of the system.  These configuration files and packages make for extermely quick and predictable system setups.
 
-System updates occur by fetching the newest versions the packages, creating a new snapshot of all system binaries using symbolic links, and then linking the running system to these new binaries.  This means that if there is a problem with an update, it is trivial to revert to an older, working version, even while the system is running.  It also means that every aspect of the system binaries is configurable.
+System updates occur by fetching the newest versions the packages, creating a new snapshot of all system binaries using symbolic links, and then linking the running system to these new binaries.  This means that if there is a problem with an update, it is trivial to revert to an older, working version, even while the system is running.  It also means that every aspect of the system binaries is configurable.  If a different version of a binary is needed, there are multiple ways to handle using this version instead.
 
-The configurability of all system binaries allows for many amazing things.  Need to download a bespoke version of Java to run your Minecraft server?  NixOS has you covered.  You can configure which versions Java are available to each application independently.  Do you constantly set up basically the same machine, say the webserver stack-de-jour?  NixOS has you covered.  Once one machine has been configured to your satisfaction, you can just copy that configuration file, adjust a few host settings, and within minutes you will have an identical machine running somewhere else.
-
+The configurability of all system binaries allows for many amazing things.  Need to download a bespoke version of Java to run your Minecraft server?  NixOS can do this trivially.  You can configure which version(s) of Java are available to each application independently.  Do you constantly set up basically the same machine, say the webserver stack-de-jour?  NixOS configuration files make this simple.  Once one machine has been configured to your satisfaction, you can just copy that configuration file, adjust a few host settings, and within minutes you will have a nearly identical machine running somewhere else.
 
 ### NixOS Complications
 
@@ -18,15 +17,15 @@ NixOS isn't perfect.  Some of NixOS's features have unintended consequences.  Th
 
 #### Nix Binary Store is Read-Only
 
-Read-only binaries are a great feature in theory.  This means you don't have to worry about them changing on you during an update.  Updates in NixOS will download a new binary.  The old one hangs around until it is no longer used and gets garbage collected to free up disk.  If one reverts their system to using the older binary, it can be redownloaded if it is now missing.
+The Nix store is where all Nix packages are...stored.  It is a read-only folder, usually something like `/nix` on the filesystem.  This means you don't have to worry about the store files changing during an update.  Updates in NixOS will download a new binary.  The old one hangs around until it is no longer used and gets garbage collected to free up disk.  This allows for rollbacks to older package collections if, in an update, something breaks.
 
-In practice, this means that some applications don't work normally since some application use their own installtion directory for file storage.  NPM, the package manager for Node.js, can't install packages globally since, by default, it uses its installed directory to store these files.  In NixOS, this is read-only, so can't be used and the install operation will fail.  Visual Studio Code a similar problem.  It installs extensions in its application folder.  This, again, is complicated by NixOS, and extensions have to be installed through the NixOS configuration file (this is actually an oversimplification, there are [multiple ways to install VSCode](https://nixos.wiki/wiki/Visual_Studio_Code)).
+In practice, this means that some applications don't work normally since they normally use their installation folder as part of the application state.  NPM, the package manager for Node.js, can't install packages globally since, by default, it uses its installed directory as the location for global packages.  Visual Studio Code and Zed have a similar problem.  They install extensions in their application folders.  This, again, is complicated by NixOS, and extensions have to be installed through the NixOS configuration file (this is actually an oversimplification, there are [multiple ways to install VSCode](https://nixos.wiki/wiki/Visual_Studio_Code)).
 
 Most of these complications can be overcome, but it requires knowledge to do so.  You can configure NPM to use a different, writable location to install global packages and add this location to your path.  There is version of the Visual Studio Code package that appears to run normally using `chroot` and a fake filesystem.  However, if no one has solved the problem for a particular application, it may not run withot further intervention.
 
 #### Application Installation in Configuration
 
-The accepted way to install applications in NixOS is to add them to the system's `configuration.nix` file.  By adding them to either the system or user environment, the binaries will be added to the PATH.  This is nice in that it is explicit and allows for complete configuration of the installed applications.  It is less nice in that it is more time consuming than on other OS's.
+The accepted way to install applications in NixOS is to add them to the system's `configuration.nix` file.  By adding them to either the system or user environment, the binaries will be added to the PATH.  This is great in that it is explicit and allows for complete configuration of the installed applications.  It is less great in that it is more time consuming than on other OS's.
 
 The normal way to install applications in Linux is to use the distribution's accepted package manager: `dnf`, `apt`, `pacman`, etc.  These make installing applications as simple as `apt install chrome` for Google Chrome.  The applications are then usually immediately available.  In NixOS, there are more steps:
 

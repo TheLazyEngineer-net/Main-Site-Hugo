@@ -1,7 +1,8 @@
-// Light / Dark theme setup and toggling
+// light / dark site theme setup and toggling
 (function () {
   const defaultTheme = '{{ site.Params.theme.default | default "system"}}';
   const themes = new Set(["system", "light", "dark"]);
+  const mediaIsDark = window.matchMedia("(prefers-color-scheme: dark)");
   const themeToggles = document.querySelectorAll(
     'input[theme-toggle][type="checkbox"]',
   );
@@ -16,7 +17,7 @@
 
   const setPageTheme = function (theme) {
     document.documentElement.setAttribute("data-theme", getTheme(theme));
-    // Note: checked checkbox => dark mode
+    // checked checkbox <=> dark mode
     themeToggles.forEach((e) => (e.checked = isDark(theme)));
   };
 
@@ -26,30 +27,25 @@
     theme = "system";
   }
 
-  setPageTheme(
-    theme !== "system"
-      ? theme
-      : getTheme(window.matchMedia("(prefers-color-scheme: dark)").matches),
-  );
+  setPageTheme(theme !== "system" ? theme : getTheme(mediaIsDark.matches));
   localStorage.theme = theme;
 
-  // add click event handler to the buttons
+  // add change event handler to the buttons
   themeToggles.forEach((el) => {
-    el.addEventListener("change", function () {
-      setPageTheme(el.checked);
-      localStorage.theme = getTheme(el.checked);
+    el.addEventListener("change", (e) => {
+      const isDark = e.target.checked;
+      setPageTheme(isDark);
+      localStorage.theme = getTheme(isDark);
     });
   });
 
   // listen for system theme changes
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", (e) => {
-      if (!localStorage.theme) {
-        localStorage.theme = "system";
-      }
-      if (localStorage.theme === "system") {
-        setPageTheme(getTheme(e.matches));
-      }
-    });
+  mediaIsDark.addEventListener("change", (e) => {
+    if (!localStorage.theme) {
+      localStorage.theme = "system";
+    }
+    if (localStorage.theme === "system") {
+      setPageTheme(getTheme(e.matches));
+    }
+  });
 })();

@@ -20,6 +20,11 @@
       flake = false;
     };
 
+    # iosevka = {
+    #   url = "github:be5invis/Iosevka/v33.3.3";
+    #   flake = false;
+    # };
+
     tailwindcss-typography = {
       url = "https://github.com/tailwindlabs/tailwindcss-typography/archive/refs/tags/v0.5.19.tar.gz";
       flake = false;
@@ -49,10 +54,12 @@
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
             hugo
+            nodejs_24
             pagefind
             serve-site
             tailwindcss_4
             tailwindcss-language-server
+            ttfautohint
             vscode-langservers-extracted
           ];
 
@@ -62,6 +69,11 @@
             ln -snf "${daisyui-theme}" assets/js/lib/daisyui-theme.js
             ln -snf "${flowviewer}" assets/js/lib/flowviewer.js
             ln -snf "${tailwindcss-typography}" assets/js/lib/tailwindcss-typography
+
+            # mkdir -p assets/fonts
+            # rm -fr assets/fonts/iosevka
+            # cp -r "$iosevka}" assets/fonts/iosevka
+            # chmod -R u+rwx assets/fonts/iosevka
           '';
         };
       });

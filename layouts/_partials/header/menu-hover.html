@@ -31,7 +31,7 @@
           <div
             tabindex="{{ $i }}"
             role="button"
-            class="btn btn-sm btn-soft btn-{{ $size }} btn-{{ $color }}"
+            class="btn btn-sm btn-{{ $size }} btn-{{ $color }}{{ if $attrs.class }} btn-soft{{ end }}"
           >
             <span class="text-base md:text-lg">{{ $name }}</span>
           </div>
@@ -76,7 +76,7 @@
       >
         <div
           role="button"
-          class="btn btn-sm btn-soft btn-{{ $size }} btn-{{ $color }}"
+          class="btn btn-sm btn-{{ $size }} btn-{{ $color }}{{ if $attrs.class }} btn-soft{{ end }}"
         >
           <span class="text-base md:text-lg">{{ $name }}</span>
         </div>

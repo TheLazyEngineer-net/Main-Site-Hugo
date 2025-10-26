@@ -8,6 +8,8 @@ description = "About TheLazyEngineer.net"
     weight = 100
 +++
 
+### Motivation
+
 Robust systems are becoming increasingly hard to find with new technology.  We seem to be happy with technology that will only last five years.  It wasn't long ago that we had to replace our computers and phones every two years to be able to use the newest software.  Software breaks countless things with every major release, causing untold manhours of additional work.  The constant churn of new technology is endless and it grows tiresome.
 
 Human beings are amazing at creating tools that last the test of time.  Axes and hatchets have been cutting wood (and unfortunately people) for millenia, wheels are still round and exceptionally useful, and the venerable stick has been moving things as a lever for all of recorded history.  What do these tools have in common?  Simplicity in function and form.
