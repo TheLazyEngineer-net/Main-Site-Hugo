@@ -1,1 +1,0 @@
-/nix/store/0k9bz26qyhyyddcciaj8hngsq28zjssv-flexsearch.compact.module.debug.js

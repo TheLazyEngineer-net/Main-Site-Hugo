@@ -1,3 +1,4 @@
+// Ack: https://aaronluna.dev/blog/add-copy-button-to-code-blocks-hugo-chroma/
 (function () {
   const copyCodeToClipboard = async function (copy, highlight) {
     const codeToCopy = highlight.querySelector(
