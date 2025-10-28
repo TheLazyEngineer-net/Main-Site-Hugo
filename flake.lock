@@ -1,29 +1,5 @@
 {
   "nodes": {
-    "daisyui": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-AicHOrnUUG07K52C0Tw2adD6bq0byW+4OCHskaX4+gg=",
-        "type": "file",
-        "url": "https://github.com/saadeghi/daisyui/releases/download/v5.1.13/daisyui.js"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://github.com/saadeghi/daisyui/releases/download/v5.1.13/daisyui.js"
-      }
-    },
-    "daisyui-theme": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-L/PKcv4uF0KKeXG4p6LY7JjDNxEITWtHRbz5R0kk9Kg=",
-        "type": "file",
-        "url": "https://github.com/saadeghi/daisyui/releases/download/v5.1.13/daisyui-theme.js"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://github.com/saadeghi/daisyui/releases/download/v5.1.13/daisyui-theme.js"
-      }
-    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -42,25 +18,13 @@
         "type": "github"
       }
     },
-    "flowviewer": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-3RACGgPkHgfks00goaZfn5QpuGVTKsEKW5o+PIbKKY0=",
-        "type": "file",
-        "url": "https://raw.githubusercontent.com/node-red/flow-library/659323234a0569da8b23f6a20cd79b6bc5a050ee/public/js/flowviewer.js"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://raw.githubusercontent.com/node-red/flow-library/659323234a0569da8b23f6a20cd79b6bc5a050ee/public/js/flowviewer.js"
-      }
-    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1761114652,
-        "narHash": "sha256-f/QCJM/YhrV/lavyCVz8iU3rlZun6d+dAiC3H+CDle4=",
+        "lastModified": 1761373498,
+        "narHash": "sha256-Q/uhWNvd7V7k1H1ZPMy/vkx3F8C13ZcdrKjO7Jv7v0c=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "01f116e4df6a15f4ccdffb1bcd41096869fb385c",
+        "rev": "6a08e6bb4e46ff7fcbb53d409b253f6bad8a28ce",
         "type": "github"
       },
       "original": {
@@ -72,12 +36,8 @@
     },
     "root": {
       "inputs": {
-        "daisyui": "daisyui",
-        "daisyui-theme": "daisyui-theme",
         "flake-utils": "flake-utils",
-        "flowviewer": "flowviewer",
-        "nixpkgs": "nixpkgs",
-        "tailwindcss-typography": "tailwindcss-typography"
+        "nixpkgs": "nixpkgs"
       }
     },
     "systems": {
@@ -93,19 +53,6 @@
         "owner": "nix-systems",
         "repo": "default",
         "type": "github"
-      }
-    },
-    "tailwindcss-typography": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1758725048,
-        "narHash": "sha256-Tp4p4i+RCagFA3n7cxQ0u6yIIv96tcUPLchhWo2YLhc=",
-        "type": "tarball",
-        "url": "https://github.com/tailwindlabs/tailwindcss-typography/archive/refs/tags/v0.5.19.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://github.com/tailwindlabs/tailwindcss-typography/archive/refs/tags/v0.5.19.tar.gz"
       }
     }
   },

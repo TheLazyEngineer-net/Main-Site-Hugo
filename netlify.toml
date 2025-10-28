@@ -1,6 +1,6 @@
 [build]
   publish = "public/"
-  command = 'hugo --gc --minify && npx pagefind@latest --site "public"'
+  command = 'npm run build:prod'
   [build.environment]
     HUGO_VERSION = "0.152.2"
     HUGO_ENV = "production"

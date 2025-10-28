@@ -1,4 +1,8 @@
+# Hugo
 /public/
 /resources/
 /static/pagefind
 .hugo_build.lock
+
+# Node
+/node_modules

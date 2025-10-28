@@ -1,9 +1,9 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-@plugin "./assets/js/lib/daisyui.js" {
+@plugin "daisyui" {
   themes: false;
 }
-@plugin "./assets/js/lib/daisyui-theme.js" {
+@plugin "daisyui/theme" {
   name: "dark";
   default: false;
   prefersdark: true;
@@ -37,7 +37,7 @@
   --depth: 0;
   --noise: 0;
 }
-@plugin "./assets/js/lib/daisyui-theme.js" {
+@plugin "daisyui/theme" {
   name: "light";
   default: true;
   prefersdark: false;

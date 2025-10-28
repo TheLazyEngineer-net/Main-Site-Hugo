@@ -1,0 +1,22 @@
+{
+  "name": "thelazyengineer.net",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "hugo && npm run build:pagefind",
+    "build:prod": "hugo --gc --minify && npm run build:pagefind",
+    "build:pagefind": "npx pagefind --site \"public\"",
+    "serve": "npm run serve:hugo",
+    "serve:hugo": "npm run build && hugo server",
+    "serve:pagefind": "hugo && npx pagefind --site \"public\" --serve"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "4.1.16",
+    "@tailwindcss/typography": "0.5.19",
+    "daisyui": "5.3.10",
+    "pagefind": "1.4.0",
+    "tailwindcss": "4.1.16"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}
