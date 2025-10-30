@@ -1,13 +1,19 @@
 {{- with resources.Get "svg/magnifying-glass.svg" }}
-  <button search-button class="btn btn-sm btn-accent px-3">
-    <div class="w-5 h-5">
+  <button search-button
+          aria-label="Search modal button"
+          class="btn btn-sm btn-accent btn-outline">
+    <div class="h-6 lg:opacity-50">
       {{- .Content | safe.HTML }}
     </div>
-    <div class="btn btn-neutral btn-xs font-bold hidden md:flex">
-      <span class="me-1">Cmd k</span>
+    <div class="hidden lg:flex justify-between w-20 text-md">
+      <span class="font-normal">Search site</span>
+      <span class="">/</span>
     </div>
   </button>
-  <dialog search-button-modal class="modal items-start">
+  <dialog search-button-modal
+          aria-modal="true"
+          aria-label="Search modal"
+          class="modal items-start">
     <div class="modal-box flex flex-col w-full max-w-2xl mt-16">
       <h3 class="text-lg font-bold py-4">Search Site</h3>
       {{- partial "search/bar.html" (dict "autofocus" true) }}

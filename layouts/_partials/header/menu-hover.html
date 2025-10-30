@@ -28,11 +28,9 @@
             {{- end }}
           {{- end -}}
         >
-          <div
-            tabindex="{{ $i }}"
-            role="button"
-            class="btn btn-sm btn-{{ $size }} btn-{{ $color }}{{ if $attrs.class }} btn-soft{{ end }}"
-          >
+          <div tabindex="{{ $i }}"
+               role="button"
+               class="btn btn-sm btn-{{ $size }} btn-{{ $color }}{{ if $attrs.class }} btn-soft{{ end }}">
             <span class="text-base md:text-lg">{{ $name }}</span>
           </div>
         </a>
@@ -74,10 +72,8 @@
           {{- end }}
         {{- end -}}
       >
-        <div
-          role="button"
-          class="btn btn-sm btn-{{ $size }} btn-{{ $color }}{{ if $attrs.class }} btn-soft{{ end }}"
-        >
+        <div role="button"
+             class="btn btn-sm btn-{{ $size }} btn-{{ $color }}{{ if $attrs.class }} btn-soft{{ end }}">
           <span class="text-base md:text-lg">{{ $name }}</span>
         </div>
       </a>

@@ -5,8 +5,8 @@
 //   search-pagination: element containing the pagination templates
 (async function () {
   const pagefind = await import("/pagefind/pagefind.js");
-  const bars = document.querySelectorAll("[search-bar]");
   const buttons = document.querySelectorAll("[search-button]");
+  const bars = document.querySelectorAll("[search-bar]");
 
   // throws a useful message when exactly one element is not returned
   const getSingleElement = function (el, query) {
@@ -35,12 +35,11 @@
     return !isHidden && !isModalOpen;
   };
 
-  document.addEventListener("keydown", (e) => {
-    if (e.metaKey && e.key === "k") {
+  document.addEventListener("keyup", (e) => {
+    if (e.key === "/") {
       const visBars = Array.from(bars).filter((b) => isElementVisible(b));
       if (visBars.length > 0) {
         let b = getSingleElement(visBars[0], 'input[type="search"]');
-        b.focus();
         b.value = b.value;
         return;
       }
@@ -50,6 +49,11 @@
         visButtons[0].click();
       }
     }
+  });
+
+  buttons.forEach(async (b) => {
+    const modal = getSingleElement(b.parentElement, "[search-button-modal]");
+    b.addEventListener("click", () => modal.showModal());
   });
 
   bars.forEach(async (bar) => {
@@ -100,18 +104,6 @@
         getFilters(e.target.value),
       );
       await showResults(search, results, pgn, 1);
-    });
-  });
-
-  buttons.forEach(async (b) => {
-    const modal = getSingleElement(b.parentElement, "[search-button-modal]");
-
-    b.addEventListener("click", () => modal.showModal());
-
-    modal.addEventListener("toggle", async (e) => {
-      if (e.newState === "open") {
-        searchInput.focus();
-      }
     });
   });
 

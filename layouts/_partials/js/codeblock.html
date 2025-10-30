@@ -1,7 +1,6 @@
-{{- with resources.Get "js/codeblock.js" | resources.ExecuteAsTemplate "js/codeblock.js" "" }}
+{{- with resources.Get "js/codeblock.js" }}
   {{- $opts := dict
     "minify" (not hugo.IsDevelopment)
-    "sourceMap" (cond hugo.IsDevelopment "external" "")
     "targetPath" "js/codeblock.js"
   }}
   {{- with . | js.Build $opts }}

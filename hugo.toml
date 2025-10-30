@@ -9,7 +9,7 @@ enableGitInfo = true
   tag = 'tags'
 
 [pagination]
-  pagerSize = 2
+  pagerSize = 10
   path = 'page'
 
 [markup]

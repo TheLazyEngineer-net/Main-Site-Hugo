@@ -11,7 +11,7 @@
     <input type="checkbox" checked />
     <div class="collapse-title text-secondary text-3xl font-bold pl-8">Documentation</div>
     <div class="collapse-content flex flex-col items-center gap-4">
-      <ul class="menu menu-lg w-full bg-base-100 rounded-xl">
+      <ul class="menu menu-lg w-full">
         {{- with .GetPage "/docs" -}}
           {{ partial "sidebar/sections.html" . }}
         {{- end -}}

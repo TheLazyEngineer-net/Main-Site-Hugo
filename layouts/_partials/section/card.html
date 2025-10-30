@@ -1,4 +1,4 @@
-<a class="flex flex-col p-4 bg-base-200 border-base-200 border-2 hover:border-accent rounded-xl"
+<a class="flex flex-col p-4 border-base-100 border-2 hover:border-accent rounded-xl"
    href="{{ .RelPermalink }}">
   <div class="flex w-full gap-4">
     {{ with .Param "featuredImage" }}
@@ -17,7 +17,7 @@
         <h2 class="text-xl font-extrabold text-secondary">{{ .Title }}</h2>
         {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
         {{ $dateHuman := .Date | time.Format ":date_long" }}
-        <time datetime="{{ $dateMachine }}" class="text-sm italic">{{ $dateHuman }}</time>
+        <time datetime="{{ $dateMachine }}" class="text-sm text-secondary italic">{{ $dateHuman }}</time>
       </div>
       <div class="prose-sm max-w-none">
         {{ .Summary | plainify }}

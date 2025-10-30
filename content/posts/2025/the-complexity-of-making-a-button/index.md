@@ -11,17 +11,17 @@ tags = ['Programming', 'Javascript', 'Rant']
     author = 'Brian Kernighan'
 +++
 
-Web programming has an amazing amount of nuance when viewed from different angles.  This means that even a simple toggle button generates surprising amounts of complexity.
+Web programming is hard.  It is hard because it quickly becomes complex.  Making a button to toggle this site's theme took me on a longer journey than I would have hoped through JavaScript.
 
 <!--more-->
 
 I have never been paid to make a website.  Leaving college, I was hired to do backend work and my career never pushed me away from that text-based world.  While I have spent some time investigating various web technologies over the years, none of it ever held more than a passing fancy compared with other interests.  However, that all changed when I wanted to make this website.
 
-Being a programmer and knowing that I wanted some specialized functionality, I opted to create this site from scratch using existing tooling.  Like all decisions, this one has consequences.  Site design could have been handled by people who know what they are doing through website builder software.  Instead, I get to figure everything out.  In figuring things out, I keep finding myself distracted, confused, and at times demotivated.  I am finding that there is even more complexity in the web domain than I had thought.
+Being a programmer and knowing that I wanted some specialized functionality, I opted to create this site from scratch using existing tooling.  Like all decisions, this one has consequences.  Site design could have been handled by people who know what they are doing through website builder software.  Instead, I get to figure everything out.  In doing this, I keep finding myself distracted, confused, and at times demotivated with the complexity of even the smallest thing.
 
-### Start it Up
+### Getting Going
 
-Starting up an initial site skeleton was an easy task thanks to Hugo, Nix, and some years of general programming knowledge.  After this, I had to get going with some elements for my site to make it mine.  I wanted to begin with a small, contained problem.  I knew that my lack of web-knowledge would trip me up quickly.  This led me to to a light/dark theme toggle button.  It toggles the color-theme of the page from light to dark.  It was a trivial problem that was well documented, so it seemed like a decent place to start.
+Starting up an initial site skeleton was an easy task thanks to Hugo, Nix, and some years of general programming knowledge.  After this, I had to make something to get going.  I wanted to begin with a small, contained problem.  I knew that my lack of web knowledge would trip me up quickly.  This lead me to to a light/dark theme toggle button.  It toggles the color-theme of the page from light to dark.  It was a trivial problem that was well documented, so it seemed like a decent place to start.
 
 I found many theme toggle examples from profitable companies that pay people to write documentation.  Unfortunately, I also found that none of them did quite what I wanted...the usual problems.  This meant that I got to read a bunch of GitHub implementations and AI-slop trying to find the rest of the logic that I needed.  I eventually figured out how to do eveything, but it was a bit of a journey.
 

@@ -16,7 +16,7 @@ For a given taxonomy, renders a list of terms assigned to the page.
     <span class="join-item self-center text-sm font-bold">{{ $label }}:</span>
     {{- range . }}
     <a href="{{ .RelPermalink }}" class="join-item">
-      <button class="btn btn-xs btn-soft btn-secondary">{{ .LinkTitle }}</button>
+      <button class="btn btn-sm btn-soft btn-secondary">{{ .LinkTitle }}</button>
     </a>
     {{- end }}
   </div>
