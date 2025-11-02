@@ -5,3 +5,8 @@
     HUGO_VERSION = "0.152.2"
     HUGO_ENV = "production"
     TZ = "America/Chicago"
+
+[[redirects]]
+  from = "/posts/:year/:title/images/:slug"
+  to = "/.netlify/images?url=/posts/:year/:title/images/:slug"
+  status = 200

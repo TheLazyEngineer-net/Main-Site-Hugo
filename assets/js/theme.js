@@ -6,22 +6,22 @@ const themeToggles = document.querySelectorAll(
   'input[theme-toggle][type="checkbox"]',
 );
 
-const isDark = function (val) {
+const isDark = (val) => {
   return val === true || val === "dark";
 };
 
-const getTheme = function (val) {
+const getTheme = (val) => {
   return isDark(val) ? "dark" : "light";
 };
 
-const setPageTheme = function (theme) {
+const setPageTheme = (theme) => {
   document.documentElement.setAttribute("data-theme", getTheme(theme));
   // checked checkbox <=> dark mode
   themeToggles.forEach((e) => (e.checked = isDark(theme)));
 };
 
 // initialization of theme on load
-let theme = (t = localStorage.theme) ? t : defaultTheme;
+let theme = localStorage.theme ? localStorage.theme : defaultTheme;
 if (!themes.has(theme)) {
   theme = "system";
 }

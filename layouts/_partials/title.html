@@ -1,6 +1,26 @@
-<div class="text-secondary flex flex-col gap-2">
-  <h1 class="text-2xl md:text-4xl font-extrabold">{{ .Title }}</h1>
+<div class="grid grid-cols-1 not-prose">
+  <h1 class="text-center text-3xl md:text-4xl lg:text-5xl font-extrabold text-secondary mb-6">{{ .Title }}</h1>
   {{ with .Params.subtitle -}}
-  <h2 class="text-lg font-extralight italic">{{ . }}</h2>
-  {{ end -}}
+    <h2 class="justify-self-center text-lg md:text-xl font-extralight text-secondary italic opacity-70 mb-4">{{ . }}</h2>
+  {{- end }}
+  {{ if (not .IsNode) -}}
+    <div class="flex flex-wrap justify-around">
+      {{- $datetime := .Date | time.Format "2001-02-03" -}}
+      <div class="opacity-60 italic px-4">
+        <span>Published:</span>
+        <time data-pagefind-meta="date[datetime]" datetime="{{ $datetime }}">
+          {{ .Date | time.Format ":date_long" }}
+        </time>
+      </div>
+      {{- $lastmodDatetime := .Lastmod | time.Format "2001-02-03" -}}
+      {{- if ne $datetime $lastmodDatetime -}}
+        <div class="opacity-60 italic">
+          <span>Last Modified:</span>
+          <time datetime="{{ $datetime }}">
+            {{ .Lastmod | time.Format ":date_long" }}
+          </time>
+        </div>
+      {{- end -}}
+    </div>
+  {{- end }}
 </div>

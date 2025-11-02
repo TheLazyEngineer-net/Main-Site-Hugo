@@ -1,8 +1,9 @@
 +++
 title = 'TheLazyEngineer Home'
 linkTitle = 'Home'
+description = 'Home page of TheLazyEngineer.net'
 [params]
-  subtitle = 'Collection of documentation and posts'
+  subtitle = 'A collection of documentation and posts'
 [menus]
   [menus.main]
     name = 'Home'

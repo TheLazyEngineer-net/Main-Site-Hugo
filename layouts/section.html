@@ -2,8 +2,7 @@
 {{- $paginator := .Paginate .RegularPagesRecursive -}}
 
 <div data-pagefind-ignore="all" class="flex flex-col items-center gap-4 w-full max-w-4xl bg-base-100 p-8 rounded-2xl">
-  <h1 class="text-secondary text-2xl md:text-4xl font-extrabold">{{ .Title }}</h1>
-  <h4 class="max-w-xl italic">{{ .Summary }}</h4>
+  {{- partial "title.html" . }}
   {{ .Content }}
   {{- partial "section/list-paginated.html" . }}
 </div>
