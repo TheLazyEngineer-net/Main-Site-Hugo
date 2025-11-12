@@ -1,6 +1,6 @@
-<div class="flex flex-col items-center gap-2 w-full p-2 bg-neutral">
-  <footer class="footer footer-horizontal footer-center">
-    <p class="flex">
+<footer class="grid gap-2 w-full p-2 bg-neutral">
+  <div class="footer footer-horizontal footer-center">
+    <p class="flex items-center">
       <span class="whitespace-nowrap">Built with:</span>
       <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">
         {{- with resources.Get "/svg/logo/hugo.svg" -}}
@@ -23,13 +23,23 @@
           <img src="{{ .RelPermalink }}" alt="DaisyUI Logo" class="hidden dark:block h-8">
         {{- end -}}
       </a>
-      <span class="whitespace-nowrap">and marginal engineering.</span>
+      <a href="https://github.com/TheLazyEngineer-net/Main-Site-Hugo"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="flex gap-1">
+        <span class="whitespace-nowrap hover:underline">
+          and marginal engineering
+        </span>
+        {{- with resources.Get "/svg/logo/git.svg" -}}
+          <img src="{{ .RelPermalink }}" alt="Git Logo" class="hidden dark:block h-4">
+        {{- end -}}
+      </a>
     </p>
-  </footer>
-  <footer class="footer footer-horizontal footer-center">
+  </div>
+  <div class="footer footer-horizontal footer-center">
     {{- $year := now.Year -}}
     <p class="">
       Copyright &copy; Jared Suess 2025 {{- if gt $year 2025 -}} - {{- $year -}} {{- end }}. All rights reserved.
     </p>
-  </footer>
-</div>
+  </div>
+</footer>

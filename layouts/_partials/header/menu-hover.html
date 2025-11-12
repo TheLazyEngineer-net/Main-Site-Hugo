@@ -1,7 +1,6 @@
 {{- $page := .page }}
 {{- $menuID := .menuID }}
 {{- $color := default "primary" .color }}
-{{- $size := default "md" .size }}
 
 {{- with index site.Menus $menuID }}
   {{- range $i, $m := . }}
@@ -30,7 +29,7 @@
         >
           <div tabindex="{{ $i }}"
                role="button"
-               class="btn btn-sm btn-{{ $size }} btn-{{ $color }}{{ if $attrs.class }} btn-soft{{ end }}">
+               class="btn btn-sm btn-{{ $color }}{{ if $attrs.class }} btn-soft{{ end }}">
             <span class="text-base md:text-lg">{{ $name }}</span>
           </div>
         </a>
@@ -73,7 +72,7 @@
         {{- end -}}
       >
         <div role="button"
-             class="btn btn-sm btn-{{ $size }} btn-{{ $color }}{{ if $attrs.class }} btn-soft{{ end }}">
+             class="btn btn-sm btn-{{ $color }}{{ if $attrs.class }} btn-soft{{ end }}">
           <span class="text-base md:text-lg">{{ $name }}</span>
         </div>
       </a>

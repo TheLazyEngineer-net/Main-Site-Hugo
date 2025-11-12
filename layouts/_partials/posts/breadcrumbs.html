@@ -1,0 +1,9 @@
+<ol>
+  <li><a href="/posts">Posts</a></li>
+  {{- range .Ancestors.Reverse }}
+    {{- if not .IsHome }}
+      <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+    {{- end }}
+  {{- end }}
+  <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+</ol>

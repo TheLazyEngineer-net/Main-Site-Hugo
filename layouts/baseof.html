@@ -1,19 +1,16 @@
 <!DOCTYPE html>
-<html data-theme="light" lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+<html data-theme="light"
+      lang="{{ site.Language.LanguageCode }}"
+      dir="{{ or site.Language.LanguageDirection `ltr` }}"
+      class="antialiased font-primary bg-base-100">
   <head>
     {{ partial "head.html" . -}}
     {{ block "head" . }}{{ end -}}
   </head>
-
-  <body class="flex flex-col min-w-sm min-h-screen font-primary bg-base-100 text-content">
+  <body>
     {{ partial "header.html" . -}}
-
-    <main data-pagefind-body class="flex-1 flex flex-col items-center my-8">
-      {{ block "main" . }}{{ end -}}
-    </main>
-
+    {{ block "main" . }}{{ end -}}
     {{ partialCached "footer.html" . -}}
-
     {{ partialCached "js/theme.html" . -}}
     {{ partialCached "js/search.html" . -}}
     {{ partialCached "js/codeblock.html" . -}}

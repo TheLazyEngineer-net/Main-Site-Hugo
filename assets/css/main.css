@@ -80,7 +80,7 @@
 @import "fonts.css";
 
 @theme {
-  --font-primary: Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-primary: InterVariable, ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Iosevka Custom Web", ui-monospace, monospace;
 }
 
@@ -109,4 +109,12 @@
     margin: 0;
     border-radius: var(--radius-xl);
   }
+}
+
+@utility direction-ltr {
+  direction: ltr;
+}
+
+@utility direction-rtl {
+  direction: rtl;
 }

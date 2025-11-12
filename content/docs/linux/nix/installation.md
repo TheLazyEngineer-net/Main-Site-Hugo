@@ -4,11 +4,11 @@ linkTitle = 'Installation'
 summary = 'How to install Nix and gotchas'
 +++
 
-### Introduction
+## Introduction
 
 Currently, the recommended way to install Nix is with the 'pipe `curl <some remote script>` into `sh`' method.  Basically, it downloads the install script from Nix and pipes that into the shell program to execute it.  It works fine with most Linux distributions and MacOS.  Ideally, download the script first and double check that your Linux distribution is supported instead of piping it directly into the shell program.  It is also good practice to quickly check to make sure that a remote script is what you think it is before executing it on your system.
 
-### Single vs Multi-user Installation
+## Single vs Multi-user Installation
 
 Before installing Nix, we need to figure out which version of the package manager to install.  There is a single and multi-user version.  In the multi-user installation of Nix, any user on the system can use the Nix package manager through a daemon process running as root.  In the single-user installation, only the user who installed Nix can use the package manager and there is no daemon running.
 
@@ -20,7 +20,7 @@ There are two options to fix the SELinux problem with Nix, if applicable:
 1) Disable SELinux, reducing overall system security
 2) Install the single-user version of the Nix package manager for the main user
 
-#### Check SELinux status
+### Check SELinux status
 
 ```bash
 # command that shows the current status of SELinux
@@ -38,7 +38,7 @@ Current mode:                   enforcing
 The program 'sestatus' is not in your PATH
 ```
 
-### Linux Installation
+## Linux Installation
 
 These commands may change slightly if the project moves things around.  Please consult the [current instructions](https://nixos.org/download/) to verify the install script URL.
 
@@ -54,7 +54,7 @@ sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon
 sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --no-daemon
 ```
 
-### Useful Links
+## Useful Links
 
 * [Download Nix](https://nixos.org/download/) - Download link and basic installation instructions
 * [Nix Reference Manual](https://nix.dev/manual/nix) - The main manual for Nix

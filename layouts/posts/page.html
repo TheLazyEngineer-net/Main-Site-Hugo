@@ -1,0 +1,20 @@
+{{- define "main" }}
+  <main data-pagefind-filter="section:posts"
+        class="grid min-h-dvh grid-cols-1 lg:grid-cols-[1fr_auto] grid-rows-[1fr_auto] pt-12 pb-8">
+    <div class="justify-self-center max-w-3xl lg:max-w-4xl w-full prose lg:prose-lg px-8 lg:px-12">
+      {{ partial "title.html" . }}
+      <article class="max-w-full">
+        {{ .ContentWithoutSummary }}
+      </article>
+    </div>
+    <div class="self-start sticky top-12 overflow-x-hidden hidden lg:block font-bold text-base-content/60 py-4 px-2">
+      {{- if gt (len .Fragments.Headings) 0 }}
+        <span class="text-base-content/80">Page Contents</span>
+        {{ partial "toc.html" . }}
+      {{- end }}
+    </div>
+    <div data-pagefind-ignore="all" class="col-span-2 text-center not-prose">
+      {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+    </div>
+  </main>
+{{- end }}

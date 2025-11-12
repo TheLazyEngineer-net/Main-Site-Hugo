@@ -1,17 +1,19 @@
-{{ define "main" }}
-<div data-pagefind-ignore="all" class="flex flex-col items-center gap-4 w-full max-w-4xl bg-base-200 p-8 rounded-2xl">
-  <div class="breadcrumbs text-secondary text-2xl md:text-3xl font-extrabold">
-    {{- partial "breadcrumbs.html" . }}
-  </div>
-  {{ .Content }}
-  {{- with (sort .Pages "LinkTitle" "asc") }}
-    <div class="flex flex-wrap gap-4 w-full">
-      {{ range . }}
-      <a href="{{ .RelPermalink }}">
-        <button class="btn btn-outline btn-sm btn-accent">{{ .LinkTitle }}</button>
-      </a>
-      {{ end }}
+{{- define "main" }}
+  <main data-pagefind-ignore="all"
+        class="min-h-dvh pt-12 pb-8">
+    <div class="grid grid-cols-1 justify-items-center">
+      <div class="breadcrumbs text-secondary text-2xl md:text-3xl font-extrabold py-8">
+        {{- partial "posts/breadcrumbs.html" . }}
+      </div>
+      {{- with (sort .Pages "LinkTitle" "asc") }}
+        <div class="flex flex-wrap max-w-4xl gap-4 w-full px-12">
+          {{ range . }}
+          <a href="{{ .RelPermalink }}">
+            <button class="btn btn-outline btn-sm btn-accent">{{ .LinkTitle }}</button>
+          </a>
+          {{ end }}
+        </div>
+      {{- end }}
     </div>
-  {{- end }}
-</div>
+  </main>
 {{ end }}

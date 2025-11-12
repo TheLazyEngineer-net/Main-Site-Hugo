@@ -1,13 +1,13 @@
 {{- with resources.Get "svg/magnifying-glass.svg" }}
   <button search-button
           aria-label="Search modal button"
-          class="btn btn-sm btn-accent btn-outline">
-    <div class="h-6 lg:opacity-50">
+          class="btn btn-sm btn-accent gap-2">
+    <div class="h-6 opacity-80">
       {{- .Content | safe.HTML }}
     </div>
-    <div class="hidden lg:flex justify-between w-20 text-md">
-      <span class="font-normal">Search site</span>
-      <span class="">/</span>
+    <div class="flex items-center gap-4 text-md">
+      <span class="hidden lg:block text-accent-content/60">Search</span>
+      <span class="btn btn-xs btn-neutral opacity-70">/</span>
     </div>
   </button>
   <dialog search-button-modal

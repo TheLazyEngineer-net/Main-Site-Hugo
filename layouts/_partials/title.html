@@ -1,13 +1,13 @@
-<div class="grid grid-cols-1 not-prose">
-  <h1 class="text-center text-3xl md:text-4xl lg:text-5xl font-extrabold text-secondary mb-6">{{ .Title }}</h1>
+<div class="grid grid-cols-1 not-prose min-w-full">
+  <h1 class="text-center text-3xl md:text-4xl lg:text-5xl font-extrabold text-secondary pt-8 pb-2">{{ .Title }}</h1>
   {{ with .Params.subtitle -}}
-    <h2 class="justify-self-center text-lg md:text-xl font-extralight text-secondary italic opacity-70 mb-4">{{ . }}</h2>
+    <h2 class="justify-self-center text-lg md:text-xl font-light text-secondary italic opacity-70 mb-4">{{ . }}</h2>
   {{- end }}
   {{ if (not .IsNode) -}}
-    <div class="flex flex-wrap justify-around">
+    <div class="flex flex-wrap justify-around text-base mb-4">
       {{- $datetime := .Date | time.Format "2001-02-03" -}}
       <div class="opacity-60 italic px-4">
-        <span>Published:</span>
+        <span>Written:</span>
         <time data-pagefind-meta="date[datetime]" datetime="{{ $datetime }}">
           {{ .Date | time.Format ":date_long" }}
         </time>
@@ -23,4 +23,5 @@
       {{- end -}}
     </div>
   {{- end }}
+  <hr class="border-t-2 border-secondary/70" />
 </div>

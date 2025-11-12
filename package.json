@@ -10,11 +10,11 @@
     "serve:pagefind": "hugo && npx pagefind --site \"public\" --serve"
   },
   "dependencies": {
-    "@tailwindcss/cli": "4.1.16",
+    "@tailwindcss/cli": "4.1.17",
     "@tailwindcss/typography": "0.5.19",
-    "daisyui": "5.3.10",
+    "daisyui": "5.5.0",
     "pagefind": "1.4.0",
-    "tailwindcss": "4.1.16"
+    "tailwindcss": "4.1.17"
   },
   "engines": {
     "node": ">=22.0.0"

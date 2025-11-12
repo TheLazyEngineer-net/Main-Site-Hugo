@@ -1,0 +1,48 @@
+{{- /*
+  Generates the list items (<li>) of a DaisyUI menu for the children of a given page.
+*/ -}}
+{{ template "renderChildren" . }}
+
+{{/* Recursive template for sidebar items */}}
+{{ define "renderChildren" }}
+  {{- range .Sections }}
+    {{- template "renderSection" . }}
+  {{- end }}
+  {{- range .RegularPages }}
+    {{- template "renderPage" . }}
+  {{- end }}
+{{ end }}
+
+{{ define "renderSection" }}
+  {{ $isCurrent := eq page . }}
+  {{ $expanded := or $isCurrent (page.IsDescendant .) }}
+  <li class="">
+    <details{{ if $expanded }} open{{ end }}>
+      <summary class="{{ if $isCurrent }}menu-active{{ end }} font-bold">
+        {{- if .Permalink }}
+          {{/* If the link is not empty, use it */}}
+          <a class="" href="{{ .Permalink }}">
+            {{ .LinkTitle }}
+          </a>
+        {{- else }}
+          {{/* Otherwise, just expand the section */}}
+          <span class="">
+            {{ .LinkTitle }}
+          </span>
+        {{- end }}
+      </summary>
+      <ul class="">
+        {{ template "renderChildren" . }}
+      </ul>
+    </details>
+  </li>
+{{ end }}
+
+{{ define "renderPage" }}
+  {{ $isCurrent := eq page . }}
+  <li class="">
+    <a class="{{ if $isCurrent }}menu-active{{ end }}" href="{{ .Permalink }}" title="{{ .LinkTitle }}">
+      {{ .LinkTitle }}
+    </a>
+  </li>
+{{ end }}

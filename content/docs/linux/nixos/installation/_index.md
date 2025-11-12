@@ -1,6 +1,7 @@
 +++
 title = 'NixOS Installation'
 linkTitle = 'Installation'
+summary = 'Collection of information for installing NixOS'
 +++
 
 NixOS installation is somewhat straightforward for a Linux distribution.  There are two main installation methods: GUI and minimal (console).  GUI is much easier, but tends to prefer physical access to the machine and is tailored more for workstation installation.  The minimal installation is much smaller and more suited for remote installations and servers.  Both are available on the NixOS official [download page](https://nixos.org/download/).

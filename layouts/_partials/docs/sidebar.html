@@ -1,0 +1,36 @@
+{{- $side := default "l" .side -}}
+{{- $otherSide := "l" -}}
+{{- if eq $side "l" -}}
+  {{- $otherSide = "r" -}}
+{{- end -}}
+{{- $visSize := default "lg" .visSize -}}
+{{- $id := .id | printf "%s-nav-checkbox" -}}
+<div data-pagefind-ignore="all"
+     sidebar-id="{{ .id }}"
+     class="self-start sticky top-12 overflow-x-hidden hidden {{ $visSize }}:grid grid-cols-[1fr_auto]{{ if eq $side "r" }} direction-rtl{{ end }} font-bold pt-4">
+  <div id="{{ .id }}-nav-content" class="grid grid-cols-[1fr_auto] grid-rows-[auto_1fr]">
+    <h4 class="col-span-2 direction-ltr flex items-center text-secondary font-extrabold border-y-2 h-8 px-4">{{ .title }}</h4>
+    <div class="direction-ltr opacity-70">
+      {{ partial .partial .context }}
+    </div>
+    <div class="self-center border-r-2 h-11/12 opacity-50">
+    </div>
+  </div>
+  <label class="swap h-8 w-8 text-secondary hover:text-secondary-content hover:bg-secondary border-y-2 border-{{ $otherSide }}-2 hover:border-secondary rounded-{{ $otherSide }}-lg">
+    <input type="checkbox" id="{{ $id }}" checked/>
+    <svg xmlns="http://www.w3.org/2000/svg"
+         class="{{ if (eq $otherSide "l") }}swap-off{{ else }}swap-on{{ end }} fill-current"
+         width="16"
+         height="16"
+         viewBox="0 0 512 512">
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M328 112L184 256l144 144"/>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg"
+         class="{{ if (eq $otherSide "l") }}swap-on{{ else }}swap-off{{ end }} fill-current"
+         width="16"
+         height="16"
+         viewBox="0 0 512 512">
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M184 112l144 144-144 144"/>
+    </svg>
+  </label>
+</div>

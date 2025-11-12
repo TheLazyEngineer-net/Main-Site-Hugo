@@ -6,12 +6,22 @@
 <meta name="description" content="{{ . }}">
 {{- end }}
 
+{{- with .GetTerms "authors" }}
+  {{- range . }}
+    <meta name="author" content="{{ .LinkTitle }}">
+  {{- end }}
+{{- end }}
+
+{{- with .Params.tags }}
+  <meta name="keywords" content="{{ delimit . ", " }}">
+{{- end }}
+
+{{- with .Params.featuredImage }}
+  {{- with resources.Get . }}
+    <meta data-pagefind-meta="image[content]" name="featuredimage" content="{{ .RelPermalink  }}">
+  {{- end }}
+{{- end }}
+
 {{- with (templates.Defer (dict "key" "global")) -}}
   {{- partial "head/css.html" . -}}
-{{- end -}}
-
-{{- $imports := .Store.Get "extra-imports" -}}
-{{- $context := . -}}
-{{- range $imports -}}
-  {{- partial . $context -}}
 {{- end -}}

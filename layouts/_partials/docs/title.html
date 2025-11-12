@@ -1,0 +1,9 @@
+<div class="flex flex-col items-center not-prose">
+  <div class="hidden xl:block breadcrumbs text-secondary">
+    {{ partial "docs/breadcrumbs.html" . }}
+  </div>
+  <h1 class="text-center text-3xl lg:text-4xl font-extrabold text-secondary my-2">{{ .Title }}</h1>
+  {{ with .Params.subtitle -}}
+    <h2 class="justify-self-center text-lg md:text-xl font-extralight text-secondary italic opacity-70 mb-4">{{ . }}</h2>
+  {{- end }}
+</div>

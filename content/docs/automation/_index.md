@@ -1,7 +1,9 @@
 +++
 title = 'Automation Documentation'
 linkTitle = 'Automation'
-summary = 'Documentation related to Home Assistant and general home automation'
+summary = 'Collection of doumentation for Home Automation'
 +++
 
-Automation
+## Introduction
+
+Home automation is a broad topic.  The information here is mostly related to Home Assistant, Node-RED, and devices that work well within that ecosystem.

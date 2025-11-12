@@ -1,0 +1,49 @@
+{{- $isSection := .IsSection }}
+{{- $regularPages := .RegularPages }}
+{{- $subsections := .Sections }}
+{{- with .Fragments }}
+  {{- with .Headings }}
+    <ul data-pagefind-ignore="all"
+        id="toc-nav"
+        class="menu menu-sm w-full">
+      {{- range . }}
+        {{ template "renderHeadings" . }}
+      {{- end }}
+      {{- if $isSection }}
+        {{- with $subsections }}
+          <li><a href="#subsections">Subsections</a></li>
+        {{- end }}
+        {{- with $regularPages }}
+          <li><a href="#further-reading">Further Reading</a></li>
+        {{- end }}
+      {{- end }}
+    </ul>
+  {{- end }}
+{{- end }}
+
+{{/* Recursive template for table of contents items */}}
+{{- define "renderHeadings" }}
+  {{- $minLevel := 2 }}
+  {{- $maxLevel := 4 }}
+  {{- $level := .Level }}
+  {{- if le $level $maxLevel }}
+    {{- if ge $level $minLevel }}
+      <li>
+        <a href="#{{ .ID }}">{{ .Title | safeHTML }}</a>
+        {{- with .Headings }}
+          {{- if (lt $level $maxLevel) }}
+            <ul>
+              {{- range . }}
+                {{ template "renderHeadings" . }}
+              {{- end }}
+            </ul>
+          {{- end }}
+        {{- end }}
+      </li>
+    {{- else }}
+      {{- range .Headings }}
+        {{ template "renderHeadings" . }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{ end }}

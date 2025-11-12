@@ -1,9 +1,0 @@
-{{- define "main" }}
-{{- $paginator := .Paginate .RegularPagesRecursive -}}
-
-<div data-pagefind-ignore="all" class="flex flex-col items-center gap-4 w-full max-w-4xl bg-base-100 p-8 rounded-2xl">
-  {{- partial "title.html" . }}
-  {{ .Content }}
-  {{- partial "section/list-paginated.html" . }}
-</div>
-{{- end }}

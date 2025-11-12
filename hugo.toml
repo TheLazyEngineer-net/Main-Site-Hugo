@@ -8,6 +8,12 @@ enableGitInfo = true
   author = 'authors'
   tag = 'tags'
 
+[permalinks]
+  [permalinks.taxonomy]
+    tags = "/posts/tags/"
+  [permalinks.term]
+    tags = "/posts/tags/:slug/"
+
 [pagination]
   pagerSize = 10
   path = 'page'

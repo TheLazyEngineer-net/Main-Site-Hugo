@@ -2,11 +2,9 @@
 <div data-pagefind-ignore="all"
      class="place-self-center flex flex-col items-center gap-4 w-full max-w-4xl bg-base-100 p-8 rounded-2xl">
   {{ partial "title.html" . -}}
-
-  <div class="prose md:prose-lg">
+  <div class="prose md:prose-lg max-w-full p-8">
     {{ .Content }}
   </div>
-
   <div class="collapse collapse-arrow bg-base-200 rounded-2xl">
     <input type="checkbox" checked />
     <div class="collapse-title text-secondary text-3xl font-bold pl-8">Documentation</div>

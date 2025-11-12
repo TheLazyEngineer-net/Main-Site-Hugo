@@ -1,28 +1,27 @@
-<header class="flex justify-center sticky top-0 z-50 bg-neutral">
-  <div class="navbar w-full max-w-7xl min-h-12 md:px-6 py-0">
-    <div class="navbar-start gap-4">
-      <div class="dropdown">
-        <div tabindex="0" role="button" class="btn btn-sm btn-outline btn-accent md:hidden">
-          <svg xmlns="http://www.w3.org/2000/svg" class="ionicon h-5 w-5" viewBox="0 0 512 512">
-            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M80 160h352M80 256h352M80 352h352"/>
-          </svg>
-        </div>
-        <ul tabindex="0" class="menu dropdown-content bg-neutral rounded-box p-2">
-          {{- partial "header/menu-list.html" (dict "page" . "menuID" "main" "class" "font-bold") }}
-        </ul>
+<header data-pagefind-ignore="all"
+        class="fixed inset-x-0 top-0 z-10 navbar px-4 md:px-8 min-h-0 h-12 bg-neutral/90">
+  <div class="navbar-start">
+    <div class="dropdown">
+      <div tabindex="0" role="button" class="btn btn-sm btn-secondary md:hidden mr-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon h-5 w-5" viewBox="0 0 512 512">
+          <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M80 160h352M80 256h352M80 352h352"/>
+        </svg>
       </div>
-      <a href="https://thelazyengineer.net">
-        <span class="tracking-tight font-bold text-nowrap text-xl md:text-2xl text-primary">
-          TheLazyEngineer
-        </span>
-      </a>
+      <ul tabindex="0" class="menu dropdown-content bg-neutral rounded-box p-2">
+        {{- partial "header/menu-list.html" (dict "page" . "menuID" "main" "class" "font-bold") }}
+      </ul>
     </div>
-    <div class="navbar-center hidden md:flex gap-2">
-      {{- partial "header/menu-hover.html" (dict "page" . "menuID" "main" "size" "md" "color" "secondary") }}
-    </div>
-    <div class="navbar-end flex gap-2">
-      {{- partial "search/button.html" }}
-      {{- partial "header/theme-toggle-button.html" }}
-    </div>
+    <a href="https://thelazyengineer.net">
+      <span class="tracking-tight font-bold text-nowrap text-xl md:text-2xl text-primary">
+        TheLazyEngineer
+      </span>
+    </a>
+  </div>
+  <div class="navbar-center hidden md:flex gap-2">
+    {{- partial "header/menu-hover.html" (dict "page" . "menuID" "main" "size" "md" "color" "secondary") }}
+  </div>
+  <div class="navbar-end flex gap-2">
+    {{- partial "search/button.html" }}
+    {{- partial "header/theme-toggle-button.html" }}
   </div>
 </header>

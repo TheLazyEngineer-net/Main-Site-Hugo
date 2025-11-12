@@ -1,0 +1,5 @@
+<ul class="menu w-full">
+  {{- with .GetPage "/docs" -}}
+    {{ partial "docs/sections.html" . }}
+  {{- end -}}
+</ul>

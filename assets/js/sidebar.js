@@ -36,5 +36,7 @@ const connectSidebar = function (navElementId, checkboxElementId) {
   window.addEventListener("resize", checkBoxBasedOnWindowWidth);
 };
 
-connectSidebar("docs-nav", "docs-checkbox");
-connectSidebar("toc-nav", "toc-checkbox");
+document.querySelectorAll("[sidebar-id]").forEach((el) => {
+  const id = el.getAttribute("sidebar-id");
+  connectSidebar(id + "-nav-content", id + "-nav-checkbox");
+});

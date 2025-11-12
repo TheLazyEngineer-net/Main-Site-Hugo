@@ -1,9 +1,10 @@
 +++
 title = 'Nix Package Manager'
 linkTitle = 'Nix'
+summary = 'Collection of documentation for the Nix package manager'
 +++
 
-### Introduction
+## Introduction
 
 The Nix package manager is an innovative binary manager that allows for completely reproducible environments.  Put another way, Nix allows you to download the exact same applications and libraries on Unix-like systems every time, as configured, and package it into a etherial, local environent.  For the developers out there, it's kind of like a (Docker) container, but in your shell with just symbolic links.
 
@@ -15,11 +16,6 @@ Let's compare this with how we could do this using Nix.  First, we would add a f
 
 There is a catch, as always.  Nix is also a functional language, and while it looks fairly harmless at first, it is a bit difficult.  This means to create this wonderful, reproducible environment, we have to learn a bit about this language.  This documentation is meant to aggregate and supplement what is currently available since it can be a bit daunting to navigate.
 
-### Subsections
-
-* [Installation](installation) - Some quirks related to installation
-* [Derivations](derivations) - Aggregated documentation for creating new packages
-
-### Useful Links
+## Useful Links
 
 * [Nix Manual](https://nix.dev/manual/nix) - Official Nix manual
