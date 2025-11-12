@@ -1,6 +1,6 @@
 {{- define "main" -}}
-<div data-pagefind-ignore="all"
-     class="place-self-center flex flex-col items-center gap-4 w-full max-w-4xl bg-base-100 p-8 rounded-2xl">
+<main data-pagefind-ignore="all"
+     class="flex flex-col items-center gap-4 w-full max-w-4xl bg-base-100 p-8 mx-auto rounded-2xl">
   {{ partial "title.html" . -}}
   <div class="prose md:prose-lg max-w-full p-8">
     {{ .Content }}
@@ -26,5 +26,5 @@
       {{ end -}}
     </div>
   </div>
-</div>
+</main>
 {{ end -}}
