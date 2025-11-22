@@ -26,12 +26,12 @@
       <a href="https://github.com/TheLazyEngineer-net/Main-Site-Hugo"
          target="_blank"
          rel="noopener noreferrer"
-         class="flex gap-1">
+         class="flex gap-1 items-center">
         <span class="whitespace-nowrap hover:underline">
           and marginal engineering
         </span>
         {{- with resources.Get "/svg/logo/git.svg" -}}
-          <img src="{{ .RelPermalink }}" alt="Git Logo" class="hidden dark:block h-4">
+          <img src="{{ .RelPermalink }}" alt="Git Logo" class="h-4">
         {{- end -}}
       </a>
     </p>

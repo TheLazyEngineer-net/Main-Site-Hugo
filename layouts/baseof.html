@@ -14,5 +14,8 @@
     {{ partialCached "js/theme.html" . -}}
     {{ partialCached "js/search.html" . -}}
     {{ partialCached "js/codeblock.html" . -}}
+    {{- if .HasShortcode "node-red-flow" }}
+      {{ partialCached "js/node-red-flow.js" . }}
+    {{ end }}
   </body>
 </html>

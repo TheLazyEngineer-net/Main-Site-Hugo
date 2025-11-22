@@ -8,5 +8,5 @@
 
 [[redirects]]
   from = "/posts/:year/:title/images/:slug"
-  to = "/.netlify/images?url=/posts/:year/:title/:slug"
+  to = "/.netlify/images?url=/posts/:year/:title/images/:slug"
   status = 200

@@ -17,7 +17,7 @@
         <h2 class="text-xl font-extrabold text-secondary">{{ .Title }}</h2>
         {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
         {{ $dateHuman := .Date | time.Format ":date_long" }}
-        <time datetime="{{ $dateMachine }}" class="text-sm text-secondary italic">{{ $dateHuman }}</time>
+        <time datetime="{{ $dateMachine }}" class="text-sm italic opacity-70">{{ $dateHuman }}</time>
       </div>
       <div class="prose-sm max-w-none">
         {{ .Summary | plainify }}

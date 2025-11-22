@@ -1,0 +1,15 @@
+{{- with resources.Get "js/node-red-flow.js" }}
+  {{- $opts := dict
+    "minify" (not hugo.IsDevelopment)
+    "targetPath" "js/node-red-flow.js"
+  }}
+  {{- with . | js.Build $opts }}
+    {{- if hugo.IsDevelopment }}
+      <script src="{{ .RelPermalink }}" type="module"></script>
+    {{- else }}
+      {{- with . | fingerprint }}
+        <script src="{{ .RelPermalink }}" type="module" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}

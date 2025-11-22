@@ -1,8 +1,9 @@
-baseURL = 'https://thelazyengineer.net/'
+baseURL = 'https://www.thelazyengineer.net/'
 languageCode = 'en-us'
 title = 'TheLazyEngineer'
 since = '2025'
 enableGitInfo = true
+enableRobotsTXT = true
 
 [taxonomies]
   author = 'authors'
@@ -35,6 +36,9 @@ enableGitInfo = true
     disableWatch = true
     source = 'hugo_stats.json'
     target = 'assets/notwatching/hugo_stats.json'
+  # [[module.mounts]]
+  #   source = "node_modules"
+  #   target = "assets/js/lib"
   [module.hugoVersion]
     extended = false
     min = '0.151.0'

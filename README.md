@@ -27,4 +27,4 @@ npm run serve:pagefind # builds and serves with Pagefind
 
 ## License
 
-The intention of this repository's license is to make available all code and documentation as free and open.  Everything in this repository is under the MIT License EXCEPT for the content folder.  The content is not code or documentation, so not technically covered by the license anyway.
+The intention of this repository's license is to make available all code as free and open source.  All code on this site is covered by the MIT License.  The content is not covered by this license and carries the usual copyright protections.

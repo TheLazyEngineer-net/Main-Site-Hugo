@@ -23,5 +23,5 @@
 {{- end }}
 
 {{- with (templates.Defer (dict "key" "global")) -}}
-  {{- partial "head/css.html" . -}}
+  {{ partial "head/css.html" . }}
 {{- end -}}

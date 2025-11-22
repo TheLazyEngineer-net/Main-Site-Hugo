@@ -1,0 +1,169 @@
+[
+  {
+    "id": "45bb5ebcac33005f",
+    "type": "victron-input-vebus",
+    "z": "d7e874e32e64f3da",
+    "service": "com.victronenergy.vebus/276",
+    "path": "/State",
+    "serviceObj": {
+      "service": "com.victronenergy.vebus/276",
+      "name": "MultiPlus-II 48/3000/35-50 120V"
+    },
+    "pathObj": {
+      "path": "/State",
+      "type": "enum",
+      "name": "VE.Bus state",
+      "enum": {
+        "0": "Off",
+        "1": "Low Power",
+        "2": "Fault",
+        "3": "Bulk",
+        "4": "Absorption",
+        "5": "Float",
+        "6": "Storage",
+        "7": "Equalize",
+        "8": "Passthru",
+        "9": "Inverting",
+        "10": "Power assist",
+        "11": "Power supply",
+        "252": "External control"
+      }
+    },
+    "name": "Inverter State",
+    "onlyChanges": false,
+    "x": 190,
+    "y": 100,
+    "wires": [["d4a9ac3ed1d42a0f"]]
+  },
+  {
+    "id": "d4a9ac3ed1d42a0f",
+    "type": "function",
+    "z": "d7e874e32e64f3da",
+    "name": "Convert and update state",
+    "func": "var state = (function() {\n    switch (msg.payload) {\n        case 0: return \"Off\";\n        case 1: return \"Low Power\";\n        case 2: return \"Fault\";\n        case 3: return \"Bulk\";\n        case 4: return \"Absorbtion\";\n        case 5: return \"Float\";\n        case 6: return \"Storage\";\n        case 7: return \"Equalize\";\n        case 8: return \"Passthru\";\n        case 9: return \"Inverting\";\n        case 10: return \"Power Assist\";\n        case 11: return \"Power Supply\";\n        case 252: return \"External Control\"\n        default: node.error(\"bad inverter state value\", msg)\n    }\n})();\n\nflow.set('inverter.state', state);\nmsg.payload = { \"inverter\": {\"state\": state } };\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 370,
+    "y": 100,
+    "wires": [["ab88a3f92e012d3e"]]
+  },
+  {
+    "id": "7820568afc892e44",
+    "type": "victron-input-system",
+    "z": "d7e874e32e64f3da",
+    "service": "com.victronenergy.system/0",
+    "path": "/Ac/Consumption/L1/Power",
+    "serviceObj": {
+      "service": "com.victronenergy.system/0",
+      "name": "Venus system"
+    },
+    "pathObj": {
+      "path": "/Ac/Consumption/L1/Power",
+      "type": "float",
+      "name": "AC Consumption L1 (W)"
+    },
+    "name": "System AC Consumption",
+    "onlyChanges": true,
+    "roundValues": "no",
+    "x": 230,
+    "y": 160,
+    "wires": [["e3ed45306ddd4fcd"]]
+  },
+  {
+    "id": "e3ed45306ddd4fcd",
+    "type": "change",
+    "z": "d7e874e32e64f3da",
+    "name": "Update state",
+    "rules": [
+      {
+        "t": "set",
+        "p": "system.ac.consumption",
+        "pt": "flow",
+        "to": "payload",
+        "tot": "msg"
+      },
+      {
+        "t": "move",
+        "p": "payload",
+        "pt": "msg",
+        "to": "payload.system.ac.consumption",
+        "tot": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 410,
+    "y": 160,
+    "wires": [["ab88a3f92e012d3e"]]
+  },
+  {
+    "id": "701d244c5ae9239d",
+    "type": "victron-input-battery",
+    "z": "d7e874e32e64f3da",
+    "service": "com.victronenergy.battery/512",
+    "path": "/Dc/0/Voltage",
+    "serviceObj": {
+      "service": "com.victronenergy.battery/512",
+      "name": "Epoch C48100A"
+    },
+    "pathObj": {
+      "path": "/Dc/0/Voltage",
+      "type": "float",
+      "name": "Battery voltage (V)"
+    },
+    "name": "BMS Voltage",
+    "onlyChanges": false,
+    "roundValues": "2",
+    "x": 270,
+    "y": 220,
+    "wires": [["7899cdca0c0c626d"]]
+  },
+  {
+    "id": "7899cdca0c0c626d",
+    "type": "change",
+    "z": "d7e874e32e64f3da",
+    "name": "Update state",
+    "rules": [
+      {
+        "t": "set",
+        "p": "battery.voltage",
+        "pt": "flow",
+        "to": "payload",
+        "tot": "msg"
+      },
+      {
+        "t": "move",
+        "p": "payload",
+        "pt": "msg",
+        "to": "payload.battery.voltage",
+        "tot": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 410,
+    "y": 220,
+    "wires": [["ab88a3f92e012d3e"]]
+  },
+  {
+    "id": "ab88a3f92e012d3e",
+    "type": "link out",
+    "z": "d7e874e32e64f3da",
+    "name": "Global State Update",
+    "mode": "link",
+    "links": [],
+    "x": 575,
+    "y": 160,
+    "wires": []
+  }
+]

@@ -4,7 +4,7 @@ title = 'The Complexity of Making a Button'
 authors = ['Jared Suess']
 summary = 'A simple button shows the complexity of web programming.'
 description = 'A simple button opens a up a world of Javascript complexity'
-tags = ['Programming', 'Javascript', 'Rant']
+tags = ['Programming', 'Javascript', 'Website']
 [params]
   subtitle = 'Learning web programming is freaking hard'
   featuredImage = 'svg/logo/js.svg'
@@ -171,7 +171,7 @@ localStorage.theme = theme;
 
 The first new concept we bring in here is local storage.  This is a place for sites to "store" information "locally" on the user's computer.  It's often used for cookies, tokens, and site settings.  Here we are using it to store the user's preference for their color theme.  This seems to be the way that other people do this, so I copied them.
 
-The initialization merely gets the stored theme (if available), checks to make sure it's valid, then sets the site's theme to that.  It will also check to see if the dark color scheme is a system preference if the theme is set to "system".
+The initialization fetches the stored theme (if available), checks to make sure it's valid, then sets the site's theme to that.  Yes, this code inefficiently accesses the `localStorage.theme` twice, which is done exactly once every page load.  You can blame JavaScript for not allowing me to write this how I would have wanted.  I liked how this looked better than the "correct" version.  The initialization completes with setting the theme to the system theme (if configured) and setting the `localStorage.theme` to the current theme.
 
 ## Listening for Changes
 
@@ -208,15 +208,17 @@ The last thing to do was to listen for changes to the user's preferred system th
 
 ## Summation
 
-After more work than I would like to admit, I have a working theme toggle button that should be fairly easy to tweak in the future.  I am not convinced that my code is "correct" in any way, but it seems to work reliably.  The problem was self contained, like I had hoped, but it was more difficult than I had anticipated.  Javascript can be extremely difficult to use in practice.  The interactions between HTML, CSS, and Javascript is an immense topic that has a never ending list of unintended consequences.
+After more work than I would like to admit, I have a working theme toggle button that should be fairly easy to tweak in the future.  I am not convinced that my code is "correct" in any way, but it seems to work reliably.  The problem was self contained, like I had hoped, but it was more difficult than I had anticipated.  Javascript can be extremely difficult to use in practice.  The interactions between HTML, CSS, and Javascript is an immense topic that has a seeminly never ending list of unintended consequences.
 
-Why did I write this article then?  Partly to moan a bit, yes, but that's just a small part of it.  I accept that JavaScript is what it is and that we're stuck with it on the web.  I'm sure that a modern framework that uses TypeScript would fix many of the things that I am complaining about.  However, I am a masochist who learns fastest through pain.  Therefore, the real reasons for this article are:
+Why did I write this article then?  Partly to moan a bit, yes, but that's just a small part of it.  I accept that JavaScript is what it is and that we're stuck with it on the web.  I'm sure that a modern framework using TypeScript would fix many of the things that I am complaining about.  However, I am a curious masochist who learns fastest through pain.  Therefore, the real reasons for this article are:
 
 1) To help others know that web programming is hard, even when you are an experienced software engineer.  There is nothing simple or easy about this domain.
 2) To illustrate how insideous complexity can be.  A little bit of complexity can quickly corrupt a simple exercise.
 
 A theme toggle button is a pretty simple thing.  It just updates the state of one attribute on the page.  JavaScript, HTML, and CSS each introduce small levels of complexity as they are layered on top of the button.  It doesn't take many layers before a simple button becomes a complex block of code with many implications and assumptions.  Put enough of these layers on top of each other and quickly no one can know what the hell is actually going on.
 
-I was able to control the complexity of this theme toggle by isolating the JavaScript to its own file and only interacting with preexisting, labeled page elements.  These are standard practices for a reason.  They are safe heuristics for keeping things simple.  However, most real problems are not one page element and one piece of state.  This creates a storm of exponential complexity as the problem evolves and grows.
+I was able to control the complexity of this theme toggle by isolating the JavaScript to its own file and only interacting with preexisting, labeled page elements.  These are standard practices for a reason.  They are safe heuristics for keeping things manageable.  However, most real problems are not isolated to one page element and one piece of state.  This creates a storm of exponential complexity as the problem evolves and grows.
 
-Kernighan claims that "Controlling complexity is the essence of computer programming."  I would take this further: programmers are complexity crusaders.  We must steadfastly fight against complexity else it will overtake the problem.  We do this both for selfish and benign reasons: we benifit from simpler programs since they are easier to work with and by making simpler programs others can work with them.  This crusade against complexity, thus, is a just cause.  We programmers must always maintain our duty to keeping this vile killer at bay.
+Kernighan claims that "Controlling complexity is the essence of computer programming."  I would take this even further: programmers must be complexity crusaders.  We must steadfastly fight against complexity else it will overtake and conquer the problem.  We do this both for selfish and benign reasons: we benefit from simpler programs since they are easier to work with and by making simpler programs others can work with them.
+
+A button in JavaScript is the perfect minor skirmish with complexity.  By doing our best with these little battles, we help improve things just a little bit.  Each little improvement also makes the next one a little easier.  These little wins make the infinte war look a bit less gloomy and help make a little corner of the world a little simpler and more welcoming to us monkeys.

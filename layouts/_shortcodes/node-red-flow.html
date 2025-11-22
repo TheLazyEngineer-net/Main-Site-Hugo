@@ -1,0 +1,24 @@
+<div class="not-prose">
+  <div flowviewer class="relative">
+    <div class="relative">
+      <svg class="relative dark:text-neutral bg-base-200 min-h-120 border-3 border-accent w-full h-full cursor-grab active:cursor-grabbing rounded-xl rounded-bl-none">
+        <g class="flowGridlines opacity-50"></g>
+        <g class="containerGroup"></g>
+        <g class="flowGroups"></g>
+        <g class="flowWires"></g>
+        <g class="flowNodes"></g>
+      </svg>
+      <div class="absolute top-0 right-0 tooltip" data-tip="Copy JSON to clipboard">
+        <button id="copy-flow" class="btn btn-sm btn-accent rounded-sm rounded-tr-xl">Copy JSON</button>
+      </div>
+      <label flowviewer-share-details class="absolute bottom-0 right-0 tooltip" data-tip="Raw file">
+        <a href="{{ printf "%s%s" .Page.Permalink (.Get "src") }}"
+           target="_blank"
+           class="btn btn-sm btn-accent rounded-sm rounded-br-xl">
+          {{ .Get "src" }}
+        </a>
+      </label>
+    </div>
+    <div flowviewer-tabs class="flex"></div>
+  </div>
+</div>

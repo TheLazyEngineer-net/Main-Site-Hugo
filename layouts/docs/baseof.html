@@ -42,9 +42,12 @@
                  "visSize" "xl"
                  "context" .) }}
     </main>
-    {{ partial "footer.html" . }}
-    {{ partial "js/theme.html" . }}
-    {{ partial "js/search.html" . }}
-    {{ partial "js/sidebar.html" . }}
+    {{ partialCached "footer.html" . }}
+    {{ partialCached "js/theme.html" . }}
+    {{ partialCached "js/search.html" . }}
+    {{ partialCached "js/sidebar.html" . }}
+    {{- if .HasShortcode "node-red-flow" }}
+      {{ partialCached "js/node-red-flow.js" . }}
+    {{ end }}
   </body>
 </html>
